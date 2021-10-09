@@ -691,6 +691,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1810888669345311774, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
   m_PrefabInstance: {fileID: 8808104560740774874}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8624141472348173399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 978326307072198541, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
+  m_PrefabInstance: {fileID: 8808104560740774874}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8624141472348173400
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8624141472348173399}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.017638, y: 0.3650982, z: 0.3650981}
+  m_Center: {x: 0, y: 2.0716696, z: 0}
 --- !u!1001 &8808104560740774874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -702,6 +720,10 @@ PrefabInstance:
       propertyPath: leverNeck
       value: 
       objectReference: {fileID: 7141932514480283588}
+    - target: {fileID: 978326307072198541, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
+      propertyPath: m_TagString
+      value: LeverHandle
+      objectReference: {fileID: 0}
     - target: {fileID: 8808104561567439816, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
       propertyPath: m_RootOrder
       value: 0

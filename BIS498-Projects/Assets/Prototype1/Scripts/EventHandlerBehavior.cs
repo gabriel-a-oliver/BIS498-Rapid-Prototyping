@@ -4,24 +4,38 @@ using UnityEngine;
 
 public class EventHandlerBehavior : MonoBehaviour
 {
-    public GameObject lever;
+    private GameObject lever;
+    private GameObject leverHandle;
+    
     // Start is called before the first frame update
     void Start()
     {
         lever = GameObject.FindGameObjectWithTag("Lever");
+        leverHandle = GameObject.FindGameObjectWithTag("LeverHandle");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && lever.GetComponent<LeverBehavior>().upwardState == true)
+        if (Input.GetMouseButtonDown(0))
         {
-            EventManagerBehavior.FlippingDownBehaviors();
-        }
-        else
-        if (Input.GetMouseButtonDown(0) && lever.GetComponent<LeverBehavior>().downwardState == true)
-        {
-            EventManagerBehavior.FlippingUpBehaviors();
+            RaycastHit raycastHit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out raycastHit, 100f))
+            {
+                if (raycastHit.transform != null && raycastHit.transform.gameObject.CompareTag("LeverHandle"))
+                {
+                    if (lever.GetComponent<LeverBehavior>().upwardState)
+                    {
+                        EventManagerBehavior.FlippingDownBehaviors();
+                    }
+                    else
+                    {
+                        EventManagerBehavior.FlippingUpBehaviors();
+                    }
+                    
+                }
+            }
         }
     }
 }
