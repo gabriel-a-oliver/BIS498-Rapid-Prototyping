@@ -5,42 +5,41 @@ using UnityEngine;
 
 public class LeverBehavior : MonoBehaviour
 {
-    private bool upwardState = true;
-    private bool downwardState = false;
-
-    /*public delegate void FlipToDownState();
-    public delegate void FlipToUpState();
-    public static event FlipToDownState flipToDownState;
-    public static event FlipToUpState flipToUpState;*/
+    public bool upwardState = true;
+    public bool downwardState = false;
+    public GameObject leverNeck;
     
-    // Start is called before the first frame update
+    private void OnEnable()
+    {
+        EventManagerBehavior.flippingDown += FlippingDown;
+        EventManagerBehavior.flippingUp += FlippingUp;
+    }
+
     void Start()
     {
         upwardState = true;
         downwardState = false;
-        /*flipToDownState += flippingDown();
-        flipToUpState += flippingUp();*/
     }
 
     private void OnDisable()
     {
-        /*flipToDownState -= flippingDown();
-        flipToUpState -= flippingUp();*/
+        EventManagerBehavior.flippingDown -= FlippingDown;
+        EventManagerBehavior.flippingUp -= FlippingUp;
     }
 
-    private void flippingDown()
+    private void FlippingDown()
     {
-        
+        downwardState = true;
+        upwardState = false;
+        leverNeck.transform.Rotate(Vector3.right, -90f);
+        Debug.Log("Now Down State");
     }
 
-    private void flippingUp()
+    private void FlippingUp()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        downwardState = false;
+        upwardState = true;
+        leverNeck.transform.Rotate(Vector3.right, 90f);
+        Debug.Log("Now Up State");
     }
 }

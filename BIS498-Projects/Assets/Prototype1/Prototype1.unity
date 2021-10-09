@@ -423,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86273ad283aeda9419e0f74a718b573a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lever: {fileID: 0}
 --- !u!4 &1338648594 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8808104561567439816, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
@@ -685,6 +686,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29aad9022f6593143aeac838185ad8b0, type: 3}
+--- !u!1 &7141932514480283588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1810888669345311774, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
+  m_PrefabInstance: {fileID: 8808104560740774874}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8808104560740774874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -692,6 +698,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 976214810}
     m_Modifications:
+    - target: {fileID: -4667538360875740974, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
+      propertyPath: leverNeck
+      value: 
+      objectReference: {fileID: 7141932514480283588}
     - target: {fileID: 8808104561567439816, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
       propertyPath: m_RootOrder
       value: 0
