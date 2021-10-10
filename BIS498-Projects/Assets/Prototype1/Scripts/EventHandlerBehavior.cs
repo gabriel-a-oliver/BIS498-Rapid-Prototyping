@@ -7,7 +7,6 @@ public class EventHandlerBehavior : MonoBehaviour
     private GameObject lever;
     private GameObject leverHandle;
     
-    // Start is called before the first frame update
     void Start()
     {
         lever = GameObject.FindGameObjectWithTag("Lever");
@@ -33,7 +32,6 @@ public class EventHandlerBehavior : MonoBehaviour
                     {
                         EventManagerBehavior.FlippingUpBehaviors();
                     }
-                    
                 }
             }
         }
