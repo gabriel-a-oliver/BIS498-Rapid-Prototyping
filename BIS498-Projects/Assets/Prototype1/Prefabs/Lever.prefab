@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &8624141472348173400
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978326307072198541}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.017638, y: 0.3650982, z: 0.3650981}
+  m_Center: {x: 0, y: 2.0716696, z: 0}
 --- !u!1 &8808104561567439819
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +57,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff661d351f689b04c9576aa10fec2cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upwardState: 1
+  downwardState: 0
+  leverNeck: {fileID: 1810888669345311774}
 --- !u!1001 &3763763459429474206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -105,6 +121,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ebbe03abe9b86743b8e3855bcd59693, type: 3}
+--- !u!1 &1810888669345311774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3249913700315362176, guid: 2ebbe03abe9b86743b8e3855bcd59693, type: 3}
+  m_PrefabInstance: {fileID: 3763763459429474206}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7464644742811582245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6029242606417273019, guid: 2ebbe03abe9b86743b8e3855bcd59693, type: 3}
@@ -235,5 +256,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeverHandle
       objectReference: {fileID: 0}
+    - target: {fileID: 8821817484380069187, guid: 9eb10f3d54de817408295d70e1013a5a, type: 3}
+      propertyPath: m_TagString
+      value: LeverHandle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9eb10f3d54de817408295d70e1013a5a, type: 3}
+--- !u!1 &978326307072198541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8821817484380069187, guid: 9eb10f3d54de817408295d70e1013a5a, type: 3}
+  m_PrefabInstance: {fileID: 8646580146108144334}
+  m_PrefabAsset: {fileID: 0}
