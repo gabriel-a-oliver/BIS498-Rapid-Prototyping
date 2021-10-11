@@ -754,6 +754,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: LeverHandle
       objectReference: {fileID: 0}
+    - target: {fileID: 3713853474143023197, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d7ede239f9c0c7469995fdc64af5c74, type: 2}
     - target: {fileID: 8808104561567439816, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
       propertyPath: m_RootOrder
       value: 0
