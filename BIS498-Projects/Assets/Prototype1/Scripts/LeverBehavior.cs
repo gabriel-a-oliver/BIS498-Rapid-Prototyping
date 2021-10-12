@@ -23,21 +23,22 @@ public class LeverBehavior : MonoBehaviour
         EventManagerBehavior.flipDownStart += FlipDownStart;
         EventManagerBehavior.flipUpStart += FlipUpStart;
     }
+    private void OnDisable()
+        {
+            EventManagerBehavior.flippingDown -= FlippingDown;
+            EventManagerBehavior.flippingUp -= FlippingUp;
+            EventManagerBehavior.flippedDown -= FlippedDown;
+            EventManagerBehavior.flippedUp -= FlippedUp;
+            EventManagerBehavior.flipDownStart -= FlipDownStart;
+            EventManagerBehavior.flipUpStart -= FlipUpStart;
+    }
     void Start()
     {
         upwardState = true;
         downwardState = false;
+        currentlyFlipping = false;
     }
-    private void OnDisable()
-    {
-        EventManagerBehavior.flippingDown -= FlippingDown;
-        EventManagerBehavior.flippingUp -= FlippingUp;
-        EventManagerBehavior.flippedDown -= FlippedDown;
-        EventManagerBehavior.flippedUp -= FlippedUp;
-        EventManagerBehavior.flipDownStart -= FlipDownStart;
-        EventManagerBehavior.flipUpStart -= FlipUpStart;
-    }
-
+    
     private void FlipDownStart()
     {
         upwardState = false;
@@ -93,7 +94,7 @@ public class LeverBehavior : MonoBehaviour
             EventManagerBehavior.FlippedUpBehaviors();
         }
     }
-
+    
     private void FlippedDown()
     {
         downwardState = true;
