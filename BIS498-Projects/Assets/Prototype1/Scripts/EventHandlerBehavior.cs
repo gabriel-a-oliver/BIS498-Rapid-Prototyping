@@ -27,11 +27,11 @@ public class EventHandlerBehavior : MonoBehaviour
                 {
                     if (lever.GetComponent<LeverBehavior>().upwardState)
                     {
-                        EventManagerBehavior.FlippingDownBehaviors();
+                        EventManagerBehavior.FlipDownStartBehaviors();
                     }
                     else
                     {
-                        EventManagerBehavior.FlippingUpBehaviors();
+                        EventManagerBehavior.FlipUpStartBehaviors();
                     }
                 }
             }

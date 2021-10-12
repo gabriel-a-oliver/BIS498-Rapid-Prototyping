@@ -12,12 +12,16 @@ public class LeverBehavior : MonoBehaviour
     public GameObject leverNeck;
     public AudioClip flippedUpSound;
     public AudioClip flippedDownSound;
+    public AudioClip flippingUpSound;
+    public AudioClip flippingDownSound;
     private void OnEnable()
     {
         EventManagerBehavior.flippingDown += FlippingDown;
         EventManagerBehavior.flippingUp += FlippingUp;
         EventManagerBehavior.flippedDown += FlippedDown;
         EventManagerBehavior.flippedUp += FlippedUp;
+        EventManagerBehavior.flipDownStart += FlipDownStart;
+        EventManagerBehavior.flipUpStart += FlipUpStart;
     }
     void Start()
     {
@@ -30,18 +34,31 @@ public class LeverBehavior : MonoBehaviour
         EventManagerBehavior.flippingUp -= FlippingUp;
         EventManagerBehavior.flippedDown -= FlippedDown;
         EventManagerBehavior.flippedUp -= FlippedUp;
+        EventManagerBehavior.flipDownStart -= FlipDownStart;
+        EventManagerBehavior.flipUpStart -= FlipUpStart;
     }
+
+    private void FlipDownStart()
+    {
+        upwardState = false;
+        AudioSource.PlayClipAtPoint(flippingDownSound, Vector3.zero);
+        EventManagerBehavior.FlippingDownBehaviors();
+    }
+
+    private void FlipUpStart()
+    {
+        downwardState = false;
+        AudioSource.PlayClipAtPoint(flippingUpSound, Vector3.zero);
+        EventManagerBehavior.FlippingUpBehaviors();
+    }
+    
     private void FlippingDown()
     {
-        downwardState = true;
-        upwardState = false;
         Quaternion newRotation = Quaternion.Euler(-135f, 0f, 0f);
         StartCoroutine(RotateLeverNeck(newRotation, flippingLerpDuration, true));
     }
     private void FlippingUp()
     {
-        downwardState = false;
-        upwardState = true;
         Quaternion newRotation = Quaternion.Euler(-45f, 0f, 0f);
         StartCoroutine(RotateLeverNeck(newRotation, flippingLerpDuration, false));
     }
@@ -79,11 +96,13 @@ public class LeverBehavior : MonoBehaviour
 
     private void FlippedDown()
     {
+        downwardState = true;
         Debug.Log("Now Down State");
         AudioSource.PlayClipAtPoint(flippedDownSound, Vector3.zero);
     }
     private void FlippedUp()
     {
+        upwardState = true;
         Debug.Log("Now Up State");
         AudioSource.PlayClipAtPoint(flippedUpSound, Vector3.zero);
     }
