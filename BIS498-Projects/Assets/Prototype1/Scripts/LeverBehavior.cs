@@ -8,6 +8,7 @@ public class LeverBehavior : MonoBehaviour
     public bool upwardState = true;
     public bool downwardState = false;
     public bool currentlyFlipping = false;
+    [SerializeField] private float flippingLerpDuration = 1f;
     public GameObject leverNeck;
     private void OnEnable()
     {
@@ -29,7 +30,7 @@ public class LeverBehavior : MonoBehaviour
         downwardState = true;
         upwardState = false;
         Quaternion newRotation = Quaternion.Euler(-135f, 0f, 0f);
-        StartCoroutine(RotateLeverNeck(newRotation, 2f));
+        StartCoroutine(RotateLeverNeck(newRotation, flippingLerpDuration));
         //leverNeck.transform.Rotate(Vector3.right, -90f);
         Debug.Log("Now Down State");
     }
@@ -38,7 +39,7 @@ public class LeverBehavior : MonoBehaviour
         downwardState = false;
         upwardState = true;
         Quaternion newRotation = Quaternion.Euler(-45f, 0f, 0f);
-        StartCoroutine(RotateLeverNeck(newRotation, 2f));
+        StartCoroutine(RotateLeverNeck(newRotation, flippingLerpDuration));
         //leverNeck.transform.Rotate(Vector3.right, 90f);
         Debug.Log("Now Up State");
     }
@@ -57,7 +58,7 @@ public class LeverBehavior : MonoBehaviour
         Quaternion originalRotation = leverNeck.transform.rotation;
         while (currentTime <= lerpDuration)
         {
-            leverNeck.transform.rotation = Quaternion.Slerp(originalRotation, newRotation, currentTime / lerpDuration);
+            leverNeck.transform.rotation = Quaternion.Slerp(originalRotation, newRotation, Mathf.SmoothStep(0, 1, currentTime / lerpDuration)/*currentTime / lerpDuration*/);
             currentTime += Time.deltaTime;
             yield return null;
         }
