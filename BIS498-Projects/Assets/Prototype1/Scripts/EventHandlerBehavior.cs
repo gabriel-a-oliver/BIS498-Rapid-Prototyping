@@ -22,7 +22,8 @@ public class EventHandlerBehavior : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out raycastHit, 100f))
             {
-                if (raycastHit.transform != null && raycastHit.transform.gameObject.CompareTag("LeverHandle"))
+                if (raycastHit.transform != null && raycastHit.transform.gameObject.CompareTag("LeverHandle")
+                                                 && !lever.GetComponent<LeverBehavior>().currentlyFlipping)
                 {
                     if (lever.GetComponent<LeverBehavior>().upwardState)
                     {
