@@ -724,6 +724,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 976214810}
     m_Modifications:
     - target: {fileID: -4667538360875740974, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
+      propertyPath: flippedUpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: aea125eb3f7100c49a33ad9f95f79248, type: 3}
+    - target: {fileID: -4667538360875740974, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
+      propertyPath: flippedDownSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3dc9158eb5e8c7b40a1b18efdcb2b233, type: 3}
+    - target: {fileID: -4667538360875740974, guid: 32778a4a690ff5243b6cd39950ae167d, type: 3}
       propertyPath: flippingLerpDuration
       value: 0.5
       objectReference: {fileID: 0}
