@@ -90,13 +90,9 @@ public class LeverBehavior : MonoBehaviour
         {
             leverNeck.transform.rotation = Quaternion.Slerp(originalRotation, newRotation, 
                     Mathf.SmoothStep(0, 1, currentTime / lerpDuration));
-            
-
-
             if (flippingDown)
             {
                 handleRenderer.material.color = Color.Lerp(Color.blue, Color.red, currentTime / lerpDuration);
-                
                 if ((currentTime / lerpDuration) > 1/5f)
                 {
                     light1.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 1f);
@@ -117,7 +113,6 @@ public class LeverBehavior : MonoBehaviour
             else
             {
                 handleRenderer.material.color = Color.Lerp(Color.red, Color.blue, currentTime / lerpDuration);
-                
                 if ((currentTime / lerpDuration) > 1/5f)
                 {
                     light5.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 0f);
@@ -134,8 +129,7 @@ public class LeverBehavior : MonoBehaviour
                 {
                     light2.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 0f);
                 }
-            } 
-            
+            }
             currentTime += Time.deltaTime;
             yield return null;
         }
