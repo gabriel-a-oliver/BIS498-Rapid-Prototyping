@@ -66,6 +66,11 @@ MonoBehaviour:
   flippedDownSound: {fileID: 8300000, guid: 3dc9158eb5e8c7b40a1b18efdcb2b233, type: 3}
   flippingUpSound: {fileID: 8300000, guid: 29e8fa2d64340e440976ea71837d9ccc, type: 3}
   flippingDownSound: {fileID: 8300000, guid: e6152c65d145f414fb1170938221afbd, type: 3}
+  light1: {fileID: 0}
+  light2: {fileID: 0}
+  light3: {fileID: 0}
+  light4: {fileID: 0}
+  light5: {fileID: 0}
 --- !u!1001 &3763763459429474206
 PrefabInstance:
   m_ObjectHideFlags: 0
