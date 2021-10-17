@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class LeverBehavior : MonoBehaviour
 {
@@ -21,8 +22,10 @@ public class LeverBehavior : MonoBehaviour
     [SerializeField] private GameObject light3;
     [SerializeField] private GameObject light4;
     [SerializeField] private GameObject light5;
-    
-    
+
+    [SerializeField] private GameObject sideLight;
+    [SerializeField] private GameObject topLight;
+
     private void OnEnable()
     {
         EventManagerBehavior.flippingDown += FlippingDown;
@@ -93,41 +96,45 @@ public class LeverBehavior : MonoBehaviour
             if (flippingDown)
             {
                 handleRenderer.material.color = Color.Lerp(Color.blue, Color.red, currentTime / lerpDuration);
+                sideLight.GetComponent<Light>().intensity = Mathf.Lerp(0.8f, 0, currentTime / lerpDuration);
+                topLight.GetComponent<Light>().intensity = Mathf.Lerp(0, 0.35f, currentTime / lerpDuration);
                 if ((currentTime / lerpDuration) > 1/5f)
                 {
-                    light1.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 1f);
+                    light1.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 1f));
                 }
                 if ((currentTime / lerpDuration) > 2/5f)
                 {
-                    light2.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 1f);
+                    light2.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 1f));
                 }
                 if ((currentTime / lerpDuration) > 3/5f)
                 {
-                    light3.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 1f);
+                    light3.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 1f));
                 }
                 if ((currentTime / lerpDuration) > 4/5f)
                 {
-                    light4.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 1f);
+                    light4.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 1f));
                 }
             }
             else
             {
                 handleRenderer.material.color = Color.Lerp(Color.red, Color.blue, currentTime / lerpDuration);
+                sideLight.GetComponent<Light>().intensity = Mathf.Lerp(0, 0.8f, currentTime / lerpDuration);
+                topLight.GetComponent<Light>().intensity = Mathf.Lerp(0.35f, 0, currentTime / lerpDuration);
                 if ((currentTime / lerpDuration) > 1/5f)
                 {
-                    light5.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 0f);
+                    light5.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 0f));
                 }
                 if ((currentTime / lerpDuration) > 2/5f)
                 {
-                    light4.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 0f);
+                    light4.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 0f));
                 }
                 if ((currentTime / lerpDuration) > 3/5f)
                 {
-                    light3.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 0f);
+                    light3.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 0f));
                 }
                 if ((currentTime / lerpDuration) > 4/5f)
                 {
-                    light2.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 0f);
+                    light2.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 0f));
                 }
             }
             currentTime += Time.deltaTime;
@@ -137,14 +144,18 @@ public class LeverBehavior : MonoBehaviour
         currentlyFlipping = false;
         if (flippingDown)
         {
+            sideLight.GetComponent<Light>().intensity = Mathf.Lerp(0, 0.8f, 0);
+            topLight.GetComponent<Light>().intensity = Mathf.Lerp(0.35f, 0, 0);
             handleRenderer.material.color = Color.Lerp(Color.blue, Color.red, 1f);
-            light5.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 1f);
+            light5.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 1f));
             EventManagerBehavior.FlippedDownBehaviors();
         }
         else
         {
+            sideLight.GetComponent<Light>().intensity = Mathf.Lerp(0, 0.8f, 1);
+            topLight.GetComponent<Light>().intensity = Mathf.Lerp(0.35f, 0, 1);
             handleRenderer.material.color = Color.Lerp(Color.blue, Color.red, 0f);
-            light1.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 0f);
+            light1.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.Lerp(Color.blue, Color.red, 0f));
             EventManagerBehavior.FlippedUpBehaviors();
         }
     }
