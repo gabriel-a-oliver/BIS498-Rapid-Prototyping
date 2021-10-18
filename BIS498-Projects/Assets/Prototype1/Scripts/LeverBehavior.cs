@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using Random = System.Random;
 
 public class LeverBehavior : MonoBehaviour
 {
@@ -25,6 +26,14 @@ public class LeverBehavior : MonoBehaviour
 
     [SerializeField] private GameObject sideLight;
     [SerializeField] private GameObject topLight;
+    
+    
+    [SerializeField] private GameObject topSparkLight;
+    [SerializeField] private GameObject topSparks;
+    
+    [SerializeField] private GameObject bottomSparkLight;
+    [SerializeField] private GameObject bottonSparks;
+
 
     private void OnEnable()
     {
@@ -165,8 +174,7 @@ public class LeverBehavior : MonoBehaviour
         downwardState = true;
         Debug.Log("Now Down State");
 
-        //light1.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 1f);
-        
+        StartCoroutine(ActivateSparks(bottonSparks, bottomSparkLight));
         AudioSource.PlayClipAtPoint(flippedDownSound, Vector3.zero);
     }
     private void FlippedUp()
@@ -174,8 +182,26 @@ public class LeverBehavior : MonoBehaviour
         upwardState = true;
         Debug.Log("Now Up State");
         
-        //light1.GetComponent<Renderer>().material.color = Color.Lerp(Color.blue, Color.red, 0f);
-        
+        StartCoroutine(ActivateSparks(topSparks, topSparkLight));
         AudioSource.PlayClipAtPoint(flippedUpSound, Vector3.zero);
+    }
+
+    private IEnumerator ActivateSparks(GameObject sparks, GameObject sparksLight)
+    {
+        if (UnityEngine.Random.Range(0f, 4f) > 3)
+        {
+            float currentTime = 0f;
+            const float SPARKLIFE = 0.25f;
+    
+            while (currentTime <= SPARKLIFE)
+            {
+                sparks.gameObject.SetActive(true);
+                sparksLight.gameObject.SetActive(true);
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+            sparks.gameObject.SetActive(false);
+            sparksLight.gameObject.SetActive(false);
+        }
     }
 }

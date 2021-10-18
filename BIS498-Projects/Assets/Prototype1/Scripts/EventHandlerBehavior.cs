@@ -9,7 +9,7 @@ public class EventHandlerBehavior : MonoBehaviour
 {
     private GameObject lever;
     private GameObject leverHandle;
-
+    
     [SerializeField] private int fpsTarget = 60;
     [SerializeField] private TMP_Text fpsText;
     [SerializeField] private float deltaTime;

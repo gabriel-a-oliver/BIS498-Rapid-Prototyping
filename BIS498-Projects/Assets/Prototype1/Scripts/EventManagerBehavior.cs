@@ -30,11 +30,11 @@ public class EventManagerBehavior : MonoBehaviour
         }
     }
     public static void FlippedDownBehaviors()
+    {
+        if (flippedDown != null)
         {
-            if (flippedDown != null)
-            {
-                flippedDown();
-            }
+            flippedDown();
+        }
     }
     public static void FlipDownStartBehaviors()
     {
