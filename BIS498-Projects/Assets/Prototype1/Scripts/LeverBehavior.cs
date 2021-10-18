@@ -188,7 +188,7 @@ public class LeverBehavior : MonoBehaviour
 
     private IEnumerator ActivateSparks(GameObject sparks, GameObject sparksLight)
     {
-        if (UnityEngine.Random.Range(0f, 4f) > 3)
+        if (UnityEngine.Random.Range(0f, 3f) >= 2)
         {
             float currentTime = 0f;
             const float SPARKLIFE = 0.25f;
