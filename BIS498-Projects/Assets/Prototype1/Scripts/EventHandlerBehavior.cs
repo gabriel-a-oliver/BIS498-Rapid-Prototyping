@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class EventHandlerBehavior : MonoBehaviour
@@ -18,6 +19,7 @@ public class EventHandlerBehavior : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = fpsTarget;
+        checkFPS();
     }
 
     void Start()
@@ -31,10 +33,10 @@ public class EventHandlerBehavior : MonoBehaviour
     {
         showFPS();
         
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.isPressed.Equals(true))
         {
             RaycastHit raycastHit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out raycastHit, 100f))
             {
                 if (raycastHit.transform != null && raycastHit.transform.gameObject.CompareTag("LeverHandle")
