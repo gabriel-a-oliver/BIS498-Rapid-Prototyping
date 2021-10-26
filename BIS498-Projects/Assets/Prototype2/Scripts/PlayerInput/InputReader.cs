@@ -89,7 +89,7 @@ public class InputReader : MonoBehaviour
         jumpPressed = false;
     }
     
-    public void DisplayInput(int currentInput)
+    public String CreateInputString(int currentInput)
     {
         
         String inputRecorded = "" + currentInput;
@@ -106,15 +106,15 @@ public class InputReader : MonoBehaviour
             inputRecorded += " J";
         }
 
-        if (currentInput != 0)
+        /*if (currentInput != 0)
         {
             Debug.Log(inputRecorded);
         }
         else
         {
             Debug.Log("INPUT ERROR OCCURRED. 0 Detected");
-        }
-        
+        }*/
+        return inputRecorded;
     }
 
     public int InterpretInput()
@@ -176,6 +176,19 @@ public class InputReader : MonoBehaviour
             currentInput = 9;
         }
         return currentInput;
+    }
+
+    public String GetFrameInput()
+    {
+        int currentInput;
+        currentInput = InterpretInput();
+        string inputString = CreateInputString(currentInput);
+        return inputString;
+    }
+
+    public void DisplayInput(String inputString)
+    {
+        Debug.Log(inputString);
     }
 
     /*private void Update()

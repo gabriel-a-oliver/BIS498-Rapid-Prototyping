@@ -18,10 +18,11 @@ public class MasterPlayerController : MonoBehaviour
     void Update()
     {
         // Input Reader Behavior
-        int currentInput;
-        currentInput = _inputReader.InterpretInput();
+        /*int currentInput;
+        currentInput = _inputReader.InterpretInput();*/
+        //_inputReader.DisplayInput(currentInput);
+        string currentInput = _inputReader.GetFrameInput();
         _inputReader.DisplayInput(currentInput);
-        
-        
+
     }
 }
