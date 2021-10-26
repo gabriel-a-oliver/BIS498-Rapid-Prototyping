@@ -29,7 +29,7 @@ public class InputReader : MonoBehaviour
     private void DefinePositions()
     {
         float regSqr = Mathf.Sqrt(2f) / 2f;
-        float stdPoint = 1f;
+        //float stdPoint = 1f;
         
         downBackPos = new Vector2(-regSqr, -regSqr);
         downPos = new Vector2(0f, -1f);
@@ -120,7 +120,6 @@ public class InputReader : MonoBehaviour
     private int InterpretInput()
     {
         int currentInput = 5;
-        
         Vector2 currentClosest = neutralPos - move;
 
         if (currentClosest.magnitude > (downBackPos - move).magnitude)
