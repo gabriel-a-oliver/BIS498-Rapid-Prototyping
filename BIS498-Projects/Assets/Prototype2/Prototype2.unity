@@ -230,7 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
-  rawMove: {x: 0, y: 0}
+  jumpPressed: 0
+  punchPressed: 0
 --- !u!1 &821925359
 GameObject:
   m_ObjectHideFlags: 0

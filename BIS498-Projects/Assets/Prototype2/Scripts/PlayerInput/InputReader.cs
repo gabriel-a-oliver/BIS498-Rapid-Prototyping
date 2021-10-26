@@ -3,103 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Vector2 = UnityEngine.Vector2;
 
 public class InputReader : MonoBehaviour
 {
     private InputMaster playerControls;
-
-
-    private DefinitionArea downBackArea;
-    private DefinitionArea downArea;
-    private DefinitionArea downForwardArea;
-    private DefinitionArea backArea;
-    private DefinitionArea neutralArea;
-    private DefinitionArea forwardArea;
-    private DefinitionArea upBackArea;
-    private DefinitionArea upArea;
-    private DefinitionArea upForwardArea;
     
-
     [SerializeField] private Vector2 move = Vector2.zero;
     [SerializeField] private bool jumpPressed = false;
     [SerializeField] private bool punchPressed = false;
-    
-    
-    struct DefinitionArea
-    {
-        public Vector2 point1;
-        public Vector2 point2;
-        public Vector2 point3;
-        public Vector2 point4;
-        public Vector2[] vectorArray;
-    }
 
-    private void DefineAreas()
-    {
-        float unitSqr = (Mathf.Sqrt(3f) / 2f);
-        float smallSqr = unitSqr / 5f;
-        float regPoint = 0.5f;
-        float littlePoint = regPoint / 5f;
+    private Vector2 downBackPos;
+    private Vector2 downPos;
+    private Vector2 downForwardPos;
+    private Vector2 backPos;
+    private Vector2 neutralPos;
+    private Vector2 forwardPos;
+    private Vector2 upBackPos;
+    private Vector2 upPos;
+    private Vector2 upForwardPos;
 
-        downBackArea.vectorArray = new Vector2[4];
-        downBackArea.vectorArray[0] = new Vector2(-unitSqr, -regPoint);
-        downBackArea.vectorArray[1] = new Vector2(-regPoint, -unitSqr);
-        downBackArea.vectorArray[2] = new Vector2(-smallSqr, -littlePoint);
-        downBackArea.vectorArray[3] = new Vector2(-littlePoint, -smallSqr);
+    private void DefinePositions()
+    {
+        float regSqr = Mathf.Sqrt(2f) / 2f;
+        float stdPoint = 1f;
         
-        downArea.vectorArray = new Vector2[4];
-        downArea.vectorArray[0] = new Vector2(-regPoint, -unitSqr);
-        downArea.vectorArray[1] = new Vector2(regPoint, -unitSqr);
-        downArea.vectorArray[2] = new Vector2(-littlePoint, -smallSqr);
-        downArea.vectorArray[3] = new Vector2(littlePoint, -smallSqr);
-        
-        downForwardArea.vectorArray = new Vector2[4];
-        downForwardArea.vectorArray[0] = new Vector2(regPoint, -unitSqr);
-        downForwardArea.vectorArray[1] = new Vector2(unitSqr, -regPoint);
-        downForwardArea.vectorArray[2] = new Vector2(littlePoint, -smallSqr);
-        downForwardArea.vectorArray[3] = new Vector2(smallSqr, -littlePoint);
-        
-        backArea.vectorArray = new Vector2[4];
-        backArea.vectorArray[0] = new Vector2(-unitSqr, regPoint);
-        backArea.vectorArray[1] = new Vector2(-unitSqr, -regPoint);
-        backArea.vectorArray[2] = new Vector2(-smallSqr, littlePoint);
-        backArea.vectorArray[3] = new Vector2(-smallSqr, -littlePoint);
-        
-        /*neutralArea.point1 = new Vector2();
-        neutralArea.point2 = new Vector2();
-        neutralArea.point3 = new Vector2();
-        neutralArea.point4 = new Vector2();*/
-        
-        forwardArea.vectorArray = new Vector2[4];
-        forwardArea.vectorArray[0] = new Vector2(unitSqr, regPoint);
-        forwardArea.vectorArray[1] = new Vector2(unitSqr, -regPoint);
-        forwardArea.vectorArray[2] = new Vector2(smallSqr, littlePoint);
-        forwardArea.vectorArray[3] = new Vector2(smallSqr, -littlePoint);
-        
-        upBackArea.vectorArray = new Vector2[4];
-        upBackArea.vectorArray[0] = new Vector2(-unitSqr, regPoint);
-        upBackArea.vectorArray[1] = new Vector2(-regPoint, unitSqr);
-        upBackArea.vectorArray[2] = new Vector2(-smallSqr, littlePoint);
-        upBackArea.vectorArray[3] = new Vector2(-littlePoint, smallSqr);
-        
-        upArea.vectorArray = new Vector2[4];
-        upArea.vectorArray[0] = new Vector2(-regPoint, unitSqr);
-        upArea.vectorArray[1] = new Vector2(regPoint, unitSqr);
-        upArea.vectorArray[2] = new Vector2(-littlePoint, smallSqr);
-        upArea.vectorArray[3] = new Vector2(littlePoint, smallSqr);
-        
-        upForwardArea.vectorArray = new Vector2[4];
-        upForwardArea.vectorArray[0] = new Vector2(regPoint, unitSqr);
-        upForwardArea.vectorArray[1] = new Vector2(unitSqr, regPoint);
-        upForwardArea.vectorArray[2] = new Vector2(littlePoint, smallSqr);
-        upForwardArea.vectorArray[3] = new Vector2(smallSqr, littlePoint);
+        downBackPos = new Vector2(-regSqr, -regSqr);
+        downPos = new Vector2(0f, -1f);
+        downForwardPos = new Vector2(regSqr, -regSqr);
+        backPos = new Vector2(-1f, 0f);
+        neutralPos = new Vector2(0f, 0f);
+        forwardPos = new Vector2(1f, 0f);
+        upBackPos = new Vector2(-regSqr, regSqr);
+        upPos = new Vector2(0f, 1f);
+        upForwardPos = new Vector2(regSqr, regSqr);
     }
     
     private void Awake()
     {
-        DefineAreas();
+        DefinePositions();
         
         playerControls = new InputMaster();
         playerControls.Player.Movement.performed += context => move = context.ReadValue<Vector2>();
@@ -171,47 +116,24 @@ public class InputReader : MonoBehaviour
         }
         
     }
-    
-    
-    
-    public static bool IsPointInPolygon4(Vector2[] polygon, Vector2 testPoint)
-    {
-        bool result = false;
-        int j = polygon.Count() - 1;
-        for (int i = 0; i < polygon.Count(); i++)
-        {
-            if (polygon[i].y < testPoint.y && polygon[j].y >= testPoint.y || polygon[j].y < testPoint.y && polygon[i].y >= testPoint.y)
-            {
-                if (polygon[i].x + (testPoint.y - polygon[i].y) / (polygon[j].y - polygon[i].y) * (polygon[j].x - polygon[i].x) < testPoint.x)
-                {
-                    result = !result;
-                }
-            }
-            j = i;
-        }
-        return result;
-    }
-    
 
-    bool CheckInArea(DefinitionArea currArea)
+    private int PosCloseCheck(Vector2 currentClosest, Vector2 currentCheck, int currentInput, int possibleReturn)
     {
-        float xFloat = move.x;
-        float yFloat = move.y;
-        
-        if (xFloat >= currArea.point1.x)
+        if (currentClosest.magnitude > (currentCheck - move).magnitude)
         {
-            return true;
+            currentClosest = currentCheck - move;
+            return possibleReturn;
         }
 
-        return false;
+        return currentInput;
     }
-
+    
     private int InterpretInput()
     {
         float xFloat = move.x;
         float yFloat = move.y;
 
-        int currentInput = 0;
+        int currentInput = 5;
         
         /*bool downBack = ((xFloat >= -0.9 && xFloat <= -0.1) && (yFloat <= -0.1 && yFloat >= -0.9));
         bool down = ((xFloat >= -0.1 && xFloat <= 0.1) && (yFloat <= -0.9));
@@ -223,13 +145,74 @@ public class InputReader : MonoBehaviour
         bool up = (xFloat < 0.2 && xFloat > -0.2) && (yFloat >= 0.2);
         bool upForward = false;*/
 
-        bool downBack = IsPointInPolygon4(downBackArea.vectorArray, move);
-        bool down = IsPointInPolygon4(downArea.vectorArray, move);
-        bool downForward = IsPointInPolygon4(downForwardArea.vectorArray, move);
-        //bool neutral = IsPointInPolygon4(neutralArea.vectorArray, move);
-        bool forward = IsPointInPolygon4(forwardArea.vectorArray, move);
+        Vector2 currentClosest = neutralPos - move;
+        /*currentInput = PosCloseCheck(currentClosest, downBackPos, currentInput, 1);
+        currentInput = PosCloseCheck(currentClosest, downPos, currentInput, 2);
+        currentInput = PosCloseCheck(currentClosest, downForwardPos, currentInput, 3);
+        currentInput = PosCloseCheck(currentClosest, backPos, currentInput, 4);
+        currentInput = PosCloseCheck(currentClosest, neutralPos, currentInput, 5);
+        currentInput = PosCloseCheck(currentClosest, forwardPos, currentInput, 6);
+        currentInput = PosCloseCheck(currentClosest, upBackPos, currentInput, 7);
+        currentInput = PosCloseCheck(currentClosest, upPos, currentInput, 8);
+        currentInput = PosCloseCheck(currentClosest, upForwardPos, currentInput, 9);*/
 
         
+        if (currentClosest.magnitude > (downBackPos - move).magnitude)
+        {
+            currentClosest = downBackPos - move;
+            //SetAsOnlyTrue(true, false, false, false,false,false, false, false, false);
+            currentInput = 1;
+        }
+
+        if (currentClosest.magnitude > (downPos - move).magnitude)
+        {
+            currentClosest = downPos - move;
+            currentInput = 2;
+        }
+
+        if (currentClosest.magnitude > (downForwardPos - move).magnitude)
+        {
+            currentClosest = downForwardPos - move;
+            currentInput = 3;
+        }
+        
+        if (currentClosest.magnitude > (backPos - move).magnitude)
+        {
+            currentClosest = backPos - move;
+            currentInput = 4;
+        }
+        
+        if (currentClosest.magnitude > (neutralPos - move).magnitude)
+        {
+            currentClosest = neutralPos - move;
+            currentInput = 5;
+        }
+        
+        if (currentClosest.magnitude > (forwardPos - move).magnitude)
+        {
+            currentClosest = forwardPos - move;
+            currentInput = 6;
+        }
+        
+        if (currentClosest.magnitude > (upBackPos - move).magnitude)
+        {
+            currentClosest = upBackPos - move;
+            currentInput = 7;
+        }
+        
+        if (currentClosest.magnitude > (upPos - move).magnitude)
+        {
+            currentClosest = upPos - move;
+            currentInput = 8;
+        }
+        
+        if (currentClosest.magnitude > (upForwardPos - move).magnitude)
+        {
+            currentClosest = upForwardPos - move;
+            currentInput = 9;
+        }
+        
+        /*
         if (downBack)
         {
             currentInput = 1;
@@ -249,7 +232,7 @@ public class InputReader : MonoBehaviour
         if (forward)
         {
             currentInput = 6;
-        }
+        }*/
         
 
         return currentInput;
