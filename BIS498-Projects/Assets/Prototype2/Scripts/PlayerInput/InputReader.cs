@@ -89,7 +89,7 @@ public class InputReader : MonoBehaviour
         jumpPressed = false;
     }
     
-    private void DisplayInput(int currentInput)
+    public void DisplayInput(int currentInput)
     {
         
         String inputRecorded = "" + currentInput;
@@ -117,7 +117,7 @@ public class InputReader : MonoBehaviour
         
     }
 
-    private int InterpretInput()
+    public int InterpretInput()
     {
         int currentInput = 5;
         Vector2 currentClosest = neutralPos - move;
@@ -178,10 +178,10 @@ public class InputReader : MonoBehaviour
         return currentInput;
     }
 
-    private void Update()
+    /*private void Update()
     {
         int currentInput;
         currentInput = InterpretInput();
         DisplayInput(currentInput);
-    }
+    }*/
 }
