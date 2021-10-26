@@ -117,50 +117,15 @@ public class InputReader : MonoBehaviour
         
     }
 
-    private int PosCloseCheck(Vector2 currentClosest, Vector2 currentCheck, int currentInput, int possibleReturn)
-    {
-        if (currentClosest.magnitude > (currentCheck - move).magnitude)
-        {
-            currentClosest = currentCheck - move;
-            return possibleReturn;
-        }
-
-        return currentInput;
-    }
-    
     private int InterpretInput()
     {
-        float xFloat = move.x;
-        float yFloat = move.y;
-
         int currentInput = 5;
         
-        /*bool downBack = ((xFloat >= -0.9 && xFloat <= -0.1) && (yFloat <= -0.1 && yFloat >= -0.9));
-        bool down = ((xFloat >= -0.1 && xFloat <= 0.1) && (yFloat <= -0.9));
-        bool downForward = (xFloat >= 0.1 && xFloat <= 0.9) && (yFloat >= -0.9 && yFloat <= -0.1);
-        bool back = ((xFloat <= -0.9) && (yFloat >= -0.1 && yFloat <= 0.1));
-        bool neutral = ((xFloat >= -0.2 && xFloat <= 0.2) && (yFloat >= -0.2 && yFloat <= 0.2));
-        bool forward = ((xFloat >= 0.9) && (yFloat >= -0.1 && yFloat <= 0.1));
-        bool upBack = false;
-        bool up = (xFloat < 0.2 && xFloat > -0.2) && (yFloat >= 0.2);
-        bool upForward = false;*/
-
         Vector2 currentClosest = neutralPos - move;
-        /*currentInput = PosCloseCheck(currentClosest, downBackPos, currentInput, 1);
-        currentInput = PosCloseCheck(currentClosest, downPos, currentInput, 2);
-        currentInput = PosCloseCheck(currentClosest, downForwardPos, currentInput, 3);
-        currentInput = PosCloseCheck(currentClosest, backPos, currentInput, 4);
-        currentInput = PosCloseCheck(currentClosest, neutralPos, currentInput, 5);
-        currentInput = PosCloseCheck(currentClosest, forwardPos, currentInput, 6);
-        currentInput = PosCloseCheck(currentClosest, upBackPos, currentInput, 7);
-        currentInput = PosCloseCheck(currentClosest, upPos, currentInput, 8);
-        currentInput = PosCloseCheck(currentClosest, upForwardPos, currentInput, 9);*/
 
-        
         if (currentClosest.magnitude > (downBackPos - move).magnitude)
         {
             currentClosest = downBackPos - move;
-            //SetAsOnlyTrue(true, false, false, false,false,false, false, false, false);
             currentInput = 1;
         }
 
@@ -211,30 +176,6 @@ public class InputReader : MonoBehaviour
             currentClosest = upForwardPos - move;
             currentInput = 9;
         }
-        
-        /*
-        if (downBack)
-        {
-            currentInput = 1;
-        }
-        if (down)
-        {
-            currentInput = 2;
-        }
-        if (downForward)
-        {
-            currentInput = 3;
-        }
-        if (move == Vector2.zero)
-        {
-            currentInput = 5;
-        } 
-        if (forward)
-        {
-            currentInput = 6;
-        }*/
-        
-
         return currentInput;
     }
 
