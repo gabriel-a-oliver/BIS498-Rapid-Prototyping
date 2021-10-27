@@ -10,9 +10,26 @@ public class ActionManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void AddToActionQueue(BasicAction currentAction)
     {
         
+    }
+
+    public void ActionQueueLifeTimeDecrement()
+    {
+        
+    }
+
+    public bool ActionQueueIsEmpty()
+    {
+
+        return false;
+    }
+
+    public int PerformNextAbility()
+    {
+
+        return 0;
     }
 }
