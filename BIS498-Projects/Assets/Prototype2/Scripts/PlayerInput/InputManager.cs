@@ -6,40 +6,57 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private InputPackage[] _inputPackages;
-    [SerializeField] private String currentInput = "";
     [SerializeField] private String previousInput = "";
-    [SerializeField] private int maxInstances = 10;
 
     public BasicAction InterpretCurrentInput(String currentInput)
     {
-
-        if (InputPackagesArrayIsEmpty() || (!previousInput.Equals(_inputPackages[0].inputString) || _inputPackages[0].inputInstance == maxInstances))
+        BasicAction result = null;
+        
+        if ((!previousInput.Equals(currentInput)) || ((_inputPackages[0].inputInstance >= _inputPackages[0].maxIteration)))
         {
-            InputPackage newPackage = new InputPackage();
-            newPackage.inputString = currentInput;
-            String[] inputArray = currentInput.Split();
-            newPackage.inputArray = inputArray;
-            this.InsertInputPackageToArray(newPackage);
-
-            if (inputArray[0].Equals("P") || inputArray[0].Equals("J"))
-            {
-                Debug.Log("Button Detected");
-            }
+            InputPackage newInputPackage = CreateInputPackage(currentInput);
+            result = InterpretToAbility(newInputPackage);
         }
         else
         {
             _inputPackages[0].inputInstance++;
         }
+        //DisplayInputArray();
         
-        
-        
-        
-        /*for ()
+        return result;
+    }
+
+    private void DisplayInputArray()
+    {
+        if (_inputPackages[0] != null)
         {
-            
-        }*/
+            string resultPrint = "";
+            for (int i = 0; i < _inputPackages.Length; i++)
+            {
+                if (_inputPackages[i] != null)
+                {
+                    resultPrint += _inputPackages[i].inputString + "-" + _inputPackages[i].inputInstance + ", ";
+                }
+            }
+            Debug.Log(resultPrint);
+        }
+    }
+
+    private BasicAction InterpretToAbility(InputPackage currentInputPackage)
+    {
+        BasicAction result = null;
         
-        return null;
+        
+        
+        return result;
+    }
+
+    private InputPackage CreateInputPackage(string currentInput)
+    {
+        InputPackage newInputPackage = new InputPackage(currentInput);
+        this.InsertInputPackageToArray(newInputPackage);
+        this.previousInput = currentInput;
+        return newInputPackage;
     }
 
     // help from: https://stackoverflow.com/questions/21385066/shifting-array-elements-to-right
@@ -61,7 +78,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        _inputPackages = new InputPackage[100];
+        _inputPackages = new InputPackage[100]; // Equivalent to 100 frames or 1.4 seconds
     }
 
     // Start is called before the first frame update

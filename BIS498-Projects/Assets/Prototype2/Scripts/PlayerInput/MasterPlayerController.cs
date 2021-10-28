@@ -31,6 +31,7 @@ public class MasterPlayerController : MonoBehaviour
 
         BasicAction currentAction = _inputManager.InterpretCurrentInput(currentInput);
 
+        /*
         if (currentAction != null)
         {
             _actionManager.AddToActionQueue(currentAction);
@@ -48,6 +49,6 @@ public class MasterPlayerController : MonoBehaviour
         if (endLag < 0)
         {
             endLag = 0;
-        }
+        }*/
     }
 }
