@@ -29,12 +29,16 @@ public class MasterPlayerController : MonoBehaviour
         string currentInput = _inputReader.GetFrameInput();
         //_inputReader.DisplayInput(currentInput);
 
-        BasicAction currentAction = _inputManager.InterpretCurrentInput(currentInput);
+        InputPackage[] longestPossibleInput = _inputManager.InterpretCurrentInput(currentInput);
 
-        /*
-        if (currentAction != null)
+        
+        if (longestPossibleInput != null)
         {
-            _actionManager.AddToActionQueue(currentAction);
+            BasicAction currentAction = _actionManager.GetActionFromInput(longestPossibleInput);
+            if (currentAction != null)
+            {
+                _actionManager.AddToActionQueue(currentAction);
+            }
         }
 
         _actionManager.ActionQueueLifeTimeDecrement();
@@ -49,6 +53,6 @@ public class MasterPlayerController : MonoBehaviour
         if (endLag < 0)
         {
             endLag = 0;
-        }*/
+        }
     }
 }

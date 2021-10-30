@@ -38,7 +38,7 @@ public class ActionLibrary : MonoBehaviour
         actionDictionary.Add(new ManyKeys<InputPackage[], InputPackage[]>(punchInstructions.ElementAt(2), punchInstructions.ElementAt(3)), new RedFireball());
     }
 
-    public BasicAction InterpretInputToAbility()
+    public BasicAction InterpretInputToAbility(InputPackage[] longestPossibleInput)
     {
         BasicAction result = null;
         

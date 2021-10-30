@@ -8,14 +8,14 @@ public class InputManager : MonoBehaviour
     [SerializeField] private InputPackage[] _inputPackages;
     [SerializeField] private String previousInput = "";
 
-    public BasicAction InterpretCurrentInput(String currentInput)
+    public InputPackage[] InterpretCurrentInput(String currentInput)
     {
-        BasicAction result = null;
+        InputPackage[] result = null;
         
         if ((!previousInput.Equals(currentInput)) || ((_inputPackages[0].inputInstance >= _inputPackages[0].maxIteration)))
         {
             InputPackage newInputPackage = CreateInputPackage(currentInput);
-            result = CheckForActionInput(newInputPackage);
+            result = CreateLongestPossibleInput(newInputPackage);
         }
         else
         {
@@ -55,10 +55,10 @@ public class InputManager : MonoBehaviour
         Debug.Log(resultPrint);
     }
 
-    private BasicAction CheckForActionInput(InputPackage currentInputPackage)
+    private InputPackage[] CreateLongestPossibleInput(InputPackage currentInputPackage)
     {
-        BasicAction result = null;
-        if (currentInputPackage.inputString.Contains("P"))
+        InputPackage[] result = null;
+        if (currentInputPackage.inputString.Contains("P") || currentInputPackage.inputString.Contains("J"))
         {
             InputPackage[] longestPossibleInput = new InputPackage[6];
             longestPossibleInput[0] = currentInputPackage;
@@ -66,16 +66,9 @@ public class InputManager : MonoBehaviour
             {
                 longestPossibleInput[i] = _inputPackages[i];
             }
-            DisplayActionInput(longestPossibleInput);
-        } 
-        else 
-        if (currentInputPackage.inputString.Contains("J"))
-        {
-            
+            //DisplayActionInput(longestPossibleInput);
+            result = longestPossibleInput;
         }
-        
-        
-        
         return result;
     }
 

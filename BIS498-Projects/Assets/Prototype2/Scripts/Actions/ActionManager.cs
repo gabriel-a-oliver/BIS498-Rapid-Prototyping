@@ -18,7 +18,13 @@ public class ActionManager : MonoBehaviour
         
     }
 
+    public BasicAction GetActionFromInput(InputPackage[] longestPossibleInput)
+    {
+        BasicAction result = null;
 
+        return result;
+    }
+    
     public void AddToActionQueue(BasicAction currentAction)
     {
         
