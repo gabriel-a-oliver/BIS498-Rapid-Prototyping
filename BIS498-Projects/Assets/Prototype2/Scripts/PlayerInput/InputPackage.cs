@@ -8,7 +8,7 @@ public class InputPackage
     public string inputString;
     public string[] inputArray;
     public int inputInstance = 1;
-    public int maxIteration = 15;
+    public int maxIteration = 16;
     public int lifeTime = 31;
 
     // string inputStr must be have spaces between inputs

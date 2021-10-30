@@ -22,6 +22,24 @@ public class ActionManager : MonoBehaviour
     {
         BasicAction result = null;
 
+        if (longestPossibleInput[0].inputString.Contains("P"))
+        {
+            InputPackage[] currentMatch = 
+            List<InputPackage[]> myPunchInstructions = _actionLibrary.punchInstructions;
+            foreach(InputPackage[] instruction in myPunchInstructions)
+            {
+                bool instructionMatches = false;
+                for (int j = 0; j < instruction.Length; j++)
+                {
+                    if ()
+                    {
+                        
+                    }
+                }
+            }
+        }
+        
+        
         return result;
     }
     

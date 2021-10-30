@@ -9,7 +9,7 @@ public class BasicAction
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Action Triggered: " + actionName);
     }
 
     // Update is called once per frame

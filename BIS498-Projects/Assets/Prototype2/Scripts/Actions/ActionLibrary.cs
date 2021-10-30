@@ -5,10 +5,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ActionLibrary : MonoBehaviour
+public class ActionLibrary
 {
-    private List<InputPackage[]> punchInstructions;
-    private Dictionary<ManyKeys<InputPackage[], InputPackage[]>, BasicAction> actionDictionary;
+    public List<InputPackage[]> punchInstructions;
+    public Dictionary<ManyKeys<InputPackage[], InputPackage[]>, BasicAction> actionDictionary;
 
     public struct ManyKeys<T1, T2> {
         public T1 Item1;
@@ -28,11 +28,11 @@ public class ActionLibrary : MonoBehaviour
         
         // All abilities that use the punch button
         punchInstructions = new List<InputPackage[]>();
-        punchInstructions.Add(new InputPackage[3]{new InputPackage("2"), new InputPackage("3"), new InputPackage("6 P")});
-        punchInstructions.Add(new InputPackage[4]{new InputPackage("2"), new InputPackage("3"), new InputPackage("6"), new InputPackage("6 P")});
-        punchInstructions.Add(new InputPackage[5]{new InputPackage("4"), new InputPackage("1"),new InputPackage("2"), new InputPackage("3"), new InputPackage("6 P")});
         punchInstructions.Add(new InputPackage[6]{new InputPackage("4"), new InputPackage("1"),new InputPackage("2"), new InputPackage("3"), new InputPackage("6"), new InputPackage("6 P")});
-
+        punchInstructions.Add(new InputPackage[5]{new InputPackage("4"), new InputPackage("1"),new InputPackage("2"), new InputPackage("3"), new InputPackage("6 P")});
+        punchInstructions.Add(new InputPackage[4]{new InputPackage("2"), new InputPackage("3"), new InputPackage("6"), new InputPackage("6 P")});
+        punchInstructions.Add(new InputPackage[3]{new InputPackage("2"), new InputPackage("3"), new InputPackage("6 P")});
+        
         // Fireball dictionary element
         actionDictionary.Add(new ManyKeys<InputPackage[], InputPackage[]>(punchInstructions.ElementAt(1), punchInstructions.ElementAt(1)), new Fireball());
         actionDictionary.Add(new ManyKeys<InputPackage[], InputPackage[]>(punchInstructions.ElementAt(2), punchInstructions.ElementAt(3)), new RedFireball());
