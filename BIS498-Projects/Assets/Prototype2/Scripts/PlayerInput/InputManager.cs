@@ -15,7 +15,7 @@ public class InputManager : MonoBehaviour
         if ((!previousInput.Equals(currentInput)) || ((_inputPackages[0].inputInstance >= _inputPackages[0].maxIteration)))
         {
             InputPackage newInputPackage = CreateInputPackage(currentInput);
-            result = InterpretToAbility(newInputPackage);
+            result = CheckForActionInput(newInputPackage);
         }
         else
         {
@@ -42,9 +42,37 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private BasicAction InterpretToAbility(InputPackage currentInputPackage)
+    private void DisplayActionInput(InputPackage[] actionInput)
+    {
+        string resultPrint = "";
+        for (int i = 0; i < actionInput.Length; i++)
+        {
+            if (actionInput[i] != null)
+            {
+                resultPrint += actionInput[i].inputString + "-" + actionInput[i].inputInstance + ", ";
+            }
+        }
+        Debug.Log(resultPrint);
+    }
+
+    private BasicAction CheckForActionInput(InputPackage currentInputPackage)
     {
         BasicAction result = null;
+        if (currentInputPackage.inputString.Contains("P"))
+        {
+            InputPackage[] longestPossibleInput = new InputPackage[6];
+            longestPossibleInput[0] = currentInputPackage;
+            for (int i = 1; i < longestPossibleInput.Length - 1; i++)
+            {
+                longestPossibleInput[i] = _inputPackages[i];
+            }
+            DisplayActionInput(longestPossibleInput);
+        } 
+        else 
+        if (currentInputPackage.inputString.Contains("J"))
+        {
+            
+        }
         
         
         
