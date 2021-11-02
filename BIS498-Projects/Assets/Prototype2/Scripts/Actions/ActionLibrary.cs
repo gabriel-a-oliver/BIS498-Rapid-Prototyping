@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ActionLibrary
+public class ActionLibrary : MonoBehaviour
 {
     public List<InputPackage[]> punchInstructions;
     public Dictionary<ManyKeys<InputPackage[], InputPackage[]>, BasicAction> actionDictionary;

@@ -60,13 +60,13 @@ public class InputManager : MonoBehaviour
         InputPackage[] result = null;
         if (currentInputPackage.inputString.Contains("P") || currentInputPackage.inputString.Contains("J"))
         {
-            InputPackage[] longestPossibleInput = new InputPackage[6];
+            InputPackage[] longestPossibleInput = new InputPackage[7];
             longestPossibleInput[0] = currentInputPackage;
             for (int i = 1; i < longestPossibleInput.Length - 1; i++)
             {
                 longestPossibleInput[i] = _inputPackages[i];
             }
-            //DisplayActionInput(longestPossibleInput);
+            DisplayActionInput(longestPossibleInput);
             result = longestPossibleInput;
         }
         return result;
