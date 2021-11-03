@@ -49,7 +49,7 @@ public class InputManager : MonoBehaviour
         {
             if (actionInput[i] != null)
             {
-                resultPrint += actionInput[i].inputString + "-" + actionInput[i].inputInstance + ", ";
+                resultPrint += actionInput[i].inputString/* + "-" + actionInput[i].inputInstance*/ + ", ";
             }
         }
         Debug.Log(resultPrint);

@@ -25,13 +25,15 @@ public class ActionManager : MonoBehaviour
         
     }
 
-    private void DisplayInstruction(InputPackage[] myInstruction)
+    private string DisplayInstruction(InputPackage[] myInstruction)
     {
         string result = myInstruction[0].inputString;
         for (int i = 1; i < myInstruction.Length; i++)
         {
-            //result += 
+            result += ", " + myInstruction[i].inputString; 
         }
+        //Debug.Log(result);
+        return result;
     }
     
     
@@ -47,22 +49,27 @@ public class ActionManager : MonoBehaviour
         //DisplayInstruction(myPunchInstructions[0]);
         for (int i = 0; i < myPunchInstructions.Count; i++)
         {
+            string debug = DisplayInstruction(myPunchInstructions[i]);
+            Debug.Log("checking instruction " + i + ": " + debug);
             currentInstruction = myPunchInstructions[i];
 
             for (int j = 0; j < currentInstruction.Length; j++)
             {
                 if (!currentInstruction[j].inputString.Equals(longestPossibleInput[j].inputString))
                 {
+                    Debug.Log("Not a match");
                     j = currentInstruction.Length;
                 } else
                 if (j == currentInstruction.Length - 1)
                 {
+                    Debug.Log("found a match 1");
                     longestMatch = currentInstruction;
                 }
             }
 
             if (longestMatch != null)
             {
+                Debug.Log("found a match 2");
                 i = myPunchInstructions.Count;
             }
         }
