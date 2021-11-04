@@ -34,7 +34,7 @@ public class MasterPlayerController : MonoBehaviour
         
         if (longestPossibleInput != null)
         {
-            Debug.Log("ButtonPressedDetected");
+            //Debug.Log("ButtonPressedDetected");
             BasicAction currentAction = _actionManager.GetActionFromInput(longestPossibleInput);
             if (currentAction != null)
             {

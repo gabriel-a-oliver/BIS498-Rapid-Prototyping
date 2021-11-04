@@ -66,7 +66,7 @@ public class InputManager : MonoBehaviour
             {
                 longestPossibleInput[i] = _inputPackages[i];
             }
-            DisplayActionInput(longestPossibleInput);
+            //DisplayActionInput(longestPossibleInput);
             result = longestPossibleInput;
         }
         return result;

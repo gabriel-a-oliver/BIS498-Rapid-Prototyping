@@ -49,62 +49,37 @@ public class ActionManager : MonoBehaviour
         //DisplayInstruction(myPunchInstructions[0]);
         for (int i = 0; i < myPunchInstructions.Count; i++)
         {
-            string debug = DisplayInstruction(myPunchInstructions[i]);
-            Debug.Log("checking instruction " + i + ": " + debug);
+            //string debug = DisplayInstruction(myPunchInstructions[i]);
+            //Debug.Log("checking instruction " + i + ": " + debug);
             currentInstruction = myPunchInstructions[i];
 
             for (int j = 0; j < currentInstruction.Length; j++)
             {
                 if (!currentInstruction[j].inputString.Equals(longestPossibleInput[j].inputString))
                 {
-                    Debug.Log("Not a match");
+                    //Debug.Log("Not a match");
                     j = currentInstruction.Length;
                 } else
                 if (j == currentInstruction.Length - 1)
                 {
-                    Debug.Log("found a match 1");
+                    //Debug.Log("found a match 1");
                     longestMatch = currentInstruction;
                 }
             }
-
             if (longestMatch != null)
             {
-                Debug.Log("found a match 2");
+                //Debug.Log("found a match 2");
                 i = myPunchInstructions.Count;
             }
         }
-
         if (longestMatch != null)
         {
             Debug.Log("Match: " + DisplayInstruction(longestMatch));
+            ActionLibrary.Tuple<InputPackage[], InputPackage[]> myKey = ActionLibrary.Tuple.Create(longestMatch,longestMatch);
+            result = _actionLibrary.actionDictionary[myKey];
         }
-        
-        
-        
-        /*int longestMatchingLength = 0;
-        if (longestPossibleInput[0].inputString.Contains("P"))
-        {
-            InputPackage[] currentMatch = null;
-            List<InputPackage[]> myPunchInstructions = _actionLibrary.punchInstructions;
-            
-            
-            
-            foreach(InputPackage[] instruction in myPunchInstructions)
-            {
-                bool exactMatch = false;
-                bool instructionMatches = false;
-                for (int j = 0; j < instruction.Length; j++)
-                {
-                    if (!instruction[j].Equals(longestPossibleInput[j]))
-                    {
-                        currentMatch = null;
-                        break;
-                    }
-                }
-            }
-        }*/
-        
-        
+
+
         return result;
     }
     
