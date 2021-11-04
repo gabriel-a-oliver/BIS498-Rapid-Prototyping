@@ -76,7 +76,7 @@ public class ActionManager : MonoBehaviour
 
         if (longestMatch != null)
         {
-            Debug.Log("Match");
+            Debug.Log("Match: " + DisplayInstruction(longestMatch));
         }
         
         

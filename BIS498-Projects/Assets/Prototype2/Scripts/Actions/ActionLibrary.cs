@@ -28,10 +28,11 @@ public class ActionLibrary : MonoBehaviour
         
         // All abilities that use the punch button
         punchInstructions = new List<InputPackage[]>();
-        punchInstructions.Add(new InputPackage[6]{new InputPackage("4"), new InputPackage("1"),new InputPackage("2"), new InputPackage("3"), new InputPackage("6"), new InputPackage("6 P")});
-        punchInstructions.Add(new InputPackage[5]{new InputPackage("4"), new InputPackage("1"),new InputPackage("2"), new InputPackage("3"), new InputPackage("6 P")});
-        punchInstructions.Add(new InputPackage[4]{new InputPackage("2"), new InputPackage("3"), new InputPackage("6"), new InputPackage("6 P")});
-        punchInstructions.Add(new InputPackage[3]{new InputPackage("2"), new InputPackage("3"), new InputPackage("6 P")});
+        //punchInstructions.Add(new InputPackage[6]{new InputPackage("4"), new InputPackage("1"),new InputPackage("2"), new InputPackage("3"), new InputPackage("6"), new InputPackage("6 P")});
+        punchInstructions.Add(new InputPackage[6]{new InputPackage("6 P"), new InputPackage("6"),new InputPackage("3"), new InputPackage("2"), new InputPackage("1"), new InputPackage("4")});
+        punchInstructions.Add(new InputPackage[5]{new InputPackage("6 P"), new InputPackage("3"),new InputPackage("2"), new InputPackage("1"), new InputPackage("4")});
+        punchInstructions.Add(new InputPackage[4]{new InputPackage("6 P"), new InputPackage("6"), new InputPackage("3"), new InputPackage("2")});
+        punchInstructions.Add(new InputPackage[3]{new InputPackage("6 P"), new InputPackage("3"), new InputPackage("2")});
         
         // Fireball dictionary element
         actionDictionary.Add(new ManyKeys<InputPackage[], InputPackage[]>(punchInstructions.ElementAt(1), punchInstructions.ElementAt(1)), new Fireball());
