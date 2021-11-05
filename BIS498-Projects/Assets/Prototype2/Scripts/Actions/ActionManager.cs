@@ -69,14 +69,14 @@ public class ActionManager : MonoBehaviour
             if (longestMatch != null)
             {
                 //Debug.Log("found a match 2");
+                result = _actionLibrary.actionList[i].Item2;
                 i = myPunchInstructions.Count;
             }
         }
         if (longestMatch != null)
         {
             Debug.Log("Match: " + DisplayInstruction(longestMatch));
-            ActionLibrary.Tuple<InputPackage[], InputPackage[]> myKey = ActionLibrary.Tuple.Create(longestMatch,longestMatch);
-            result = _actionLibrary.actionDictionary[myKey];
+            //result = _actionLibrary.GetPunchAction(longestMatch);
         }
 
 

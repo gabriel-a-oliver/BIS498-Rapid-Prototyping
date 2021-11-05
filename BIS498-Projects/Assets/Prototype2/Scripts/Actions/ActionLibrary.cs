@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class ActionLibrary : MonoBehaviour
 {
     public List<InputPackage[]> punchInstructions;
-    public Dictionary<Tuple<InputPackage[], InputPackage[]>, BasicAction> actionDictionary;
+    public List<Tuple<InputPackage[], BasicAction>> actionList;
 
     public struct Tuple<T1, T2> {
         public T1 Item1;
@@ -24,7 +24,7 @@ public class ActionLibrary : MonoBehaviour
 
     private void Awake()
     {
-        actionDictionary = new Dictionary<Tuple<InputPackage[], InputPackage[]>, BasicAction>();
+        actionList = new List<Tuple<InputPackage[], BasicAction>>();
         
         // All abilities that use the punch button
         punchInstructions = new List<InputPackage[]>();
@@ -37,11 +37,15 @@ public class ActionLibrary : MonoBehaviour
         
         
         
-        // Fireball dictionary element
-        actionDictionary.Add(new Tuple<InputPackage[], InputPackage[]>(punchInstructions.ElementAt(0), punchInstructions.ElementAt(1)), new Fireball());
-        actionDictionary.Add(new Tuple<InputPackage[], InputPackage[]>(punchInstructions.ElementAt(2), punchInstructions.ElementAt(3)), new RedFireball());
         
-        DisplayAllInstructions();
+        // Fireball dictionary element
+        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(0), new Fireball()));
+        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(1), new Fireball()));
+
+        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(2), new RedFireball()));
+        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(3), new RedFireball()));
+
+        //DisplayAllInstructions();
     }
 
     private void DisplayAllInstructions()
@@ -57,6 +61,7 @@ public class ActionLibrary : MonoBehaviour
             Debug.Log(debug);
         }
 
+        /*
         Tuple<InputPackage[], InputPackage[]> myKey = Tuple.Create(new InputPackage[6]{new InputPackage("6 P"), new InputPackage("6"),new InputPackage("3"), new InputPackage("2"), new InputPackage("1"), new InputPackage("4")}, new InputPackage[5]{new InputPackage("6 P"), new InputPackage("3"), new InputPackage("2"), new InputPackage("1"), new InputPackage("4")});
         BasicAction myAction = null;
 
@@ -67,7 +72,7 @@ public class ActionLibrary : MonoBehaviour
         else
         {
             Debug.Log("No key found");
-        }
+        }*/
         
         /*myAction = actionDictionary[myKey];
         if (myAction != null)
@@ -86,6 +91,11 @@ public class ActionLibrary : MonoBehaviour
         return result;
     }
 
+    public BasicAction GetPunchAction()
+    {
+        return null;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
