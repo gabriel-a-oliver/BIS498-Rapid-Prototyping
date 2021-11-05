@@ -6,6 +6,7 @@ using UnityEngine;
 public class ActionManager : MonoBehaviour
 {
     public ActionLibrary _actionLibrary;
+    private BasicAction[] _actionQueue;
 
     private void Awake()
     {
@@ -17,6 +18,8 @@ public class ActionManager : MonoBehaviour
                 _actionLibrary = this.gameObject.AddComponent<ActionLibrary>();
             }
         }
+
+        _actionQueue = new BasicAction[5]{null, null, null, null, null};
     }
 
     // Start is called before the first frame update
@@ -85,7 +88,22 @@ public class ActionManager : MonoBehaviour
     
     public void AddToActionQueue(BasicAction currentAction)
     {
-        
+        // Bad implementation. instead just move everything to the side and add it to front
+        /*bool addedSuccessfully = false;
+        for (int i = 0; i < _actionQueue.Length; i++)
+        {
+            if (_actionQueue[i] == null)
+            {
+                _actionQueue[i] = currentAction;
+                addedSuccessfully = true;
+                i = _actionQueue.Length;
+            }
+        }
+
+        if (!addedSuccessfully)
+        {
+            replace
+        }*/
     }
 
     public void ActionQueueLifeTimeDecrement()
@@ -95,13 +113,19 @@ public class ActionManager : MonoBehaviour
 
     public bool ActionQueueIsEmpty()
     {
-
-        return false;
+        for (int i =0; i < _actionQueue.Length; i++)
+        {
+            if (_actionQueue[i] != null)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int PerformNextAbility()
     {
-
+        
         return 0;
     }
 }

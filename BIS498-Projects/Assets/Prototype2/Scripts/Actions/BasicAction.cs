@@ -6,6 +6,7 @@ public class BasicAction
 {
     public string actionName;
     
+    
     // Start is called before the first frame update
     void Start()
     {
