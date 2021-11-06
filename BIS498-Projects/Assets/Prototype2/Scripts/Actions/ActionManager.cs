@@ -88,6 +88,14 @@ public class ActionManager : MonoBehaviour
     
     public void AddToActionQueue(BasicAction currentAction)
     {
+        _actionQueue[_actionQueue.Length - 1] = null;
+        for (int i = 1; i < _actionQueue.Length; i++)
+        {
+            _actionQueue[i] = _actionQueue[i - 1];
+        }
+        _actionQueue[0] = currentAction;
+        
+        
         // Bad implementation. instead just move everything to the side and add it to front
         /*bool addedSuccessfully = false;
         for (int i = 0; i < _actionQueue.Length; i++)
@@ -108,7 +116,24 @@ public class ActionManager : MonoBehaviour
 
     public void ActionQueueLifeTimeDecrement()
     {
-        
+        for (int i = 0; i < _actionQueue.Length; i++)
+        {
+            if (_actionQueue[i] != null)
+            {
+                _actionQueue[i].SetActionQueueLifeTime(_actionQueue[i].GetActionQueueLifeTime() - 1);
+                if (_actionQueue[i].GetActionQueueLifeTime() <= 0)
+                {
+                    // remove and shift
+                    _actionQueue[i] = null;
+                    for (int j = i; j < _actionQueue.Length - 1; j++)
+                    {
+                        _actionQueue[j] = _actionQueue[j + 1];
+                    }
+
+                    i--;
+                }
+            }
+        }
     }
 
     public bool ActionQueueIsEmpty()
@@ -123,9 +148,41 @@ public class ActionManager : MonoBehaviour
         return true;
     }
 
+    private void ShiftQueue()
+    {
+        _actionQueue[_actionQueue.Length - 1] = null;
+        for (int i = _actionQueue.Length - 1; i < 0; i++)
+        {
+            _actionQueue[i] = _actionQueue[i - 1];
+        }
+    }
+
+    public void DisplayActionQueue()
+    {
+        string debug = "";
+        for (int i = 0; i < _actionQueue.Length; i++)
+        {
+            if (_actionQueue[i] != null)
+            {
+                debug += _actionQueue[i] + ", ";
+            }
+        }
+        Debug.Log("displaying action queue: " + debug);
+    }
+
     public int PerformNextAbility()
     {
+        BasicAction myAction = null;
+
+        myAction = _actionQueue[0];
+
+        for (int i = 0; i < _actionQueue.Length - 1; i++)
+        {
+            _actionQueue[0] = _actionQueue[i + 1];
+        }
         
-        return 0;
+        myAction.PerformActionBehavior();
+
+        return myAction.GetEndLag();
     }
 }

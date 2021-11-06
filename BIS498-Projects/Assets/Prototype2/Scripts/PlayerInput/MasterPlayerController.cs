@@ -40,15 +40,23 @@ public class MasterPlayerController : MonoBehaviour
             {
                 Debug.Log("adding to action queue");
                 _actionManager.AddToActionQueue(currentAction);
+                _actionManager.DisplayActionQueue();
             }
         }
 
-        _actionManager.ActionQueueLifeTimeDecrement();
-
-        if (endLag == 0 && !_actionManager.ActionQueueIsEmpty())
+        if (!_actionManager.ActionQueueIsEmpty())
         {
-            endLag = _actionManager.PerformNextAbility();
+            _actionManager.ActionQueueLifeTimeDecrement();
+            if (endLag == 0)
+            {
+                Debug.Log("Perform next ability");
+                endLag = _actionManager.PerformNextAbility();
+                Debug.Log("new endlag: " + endLag);
+            }
         }
+        
+
+        
 
 
         endLag--;

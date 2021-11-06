@@ -39,11 +39,11 @@ public class ActionLibrary : MonoBehaviour
         
         
         // Fireball dictionary element
-        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(0), new Fireball()));
-        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(1), new Fireball()));
+        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(0), new RedFireball()));
+        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(1), new RedFireball()));
 
-        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(2), new RedFireball()));
-        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(3), new RedFireball()));
+        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(2), new Fireball()));
+        actionList.Add(new Tuple<InputPackage[], BasicAction>(punchInstructions.ElementAt(3), new Fireball()));
 
         //DisplayAllInstructions();
     }
