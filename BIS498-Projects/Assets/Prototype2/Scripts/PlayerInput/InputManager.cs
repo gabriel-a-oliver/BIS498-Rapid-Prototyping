@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField] private InputPackage[] _inputPackages;
     [SerializeField] private String previousInput = "";
+    public GameObject inputStream;
 
     public InputPackage[] InterpretCurrentInput(String currentInput)
     {
@@ -15,6 +16,10 @@ public class InputManager : MonoBehaviour
         if ((!previousInput.Equals(currentInput)) || ((_inputPackages[0].inputInstance >= _inputPackages[0].maxIteration)))
         {
             InputPackage newInputPackage = CreateInputPackage(currentInput);
+            
+            
+            
+            
             result = CreateLongestPossibleInput(newInputPackage);
         }
         else
