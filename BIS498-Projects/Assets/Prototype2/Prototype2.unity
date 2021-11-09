@@ -543,7 +543,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   previousInput: 
-  inputStream: {fileID: 1293220518}
+  inputStreamArray: []
+  currentInputStream: 0
+  inputStream0: {fileID: 1692618773}
+  inputStream1: {fileID: 1641133515}
+  inputStream2: {fileID: 1781794262}
+  inputStream3: {fileID: 1652593645}
+  inputStream4: {fileID: 1593304917}
+  inputStream5: {fileID: 552913019}
+  inputStream6: {fileID: 2038166298}
+  inputStream7: {fileID: 559824927}
+  direction1: {fileID: 1526929509213599581, guid: 40dda7c7c9fdfd149b2f849be204fcb6, type: 3}
+  direction2: {fileID: 16473991775903841, guid: f5566e831be548c43a88a78222e0cb87, type: 3}
+  direction3: {fileID: 7532191481880213683, guid: 8fd9d46c79962bc43a616f9d44900e13, type: 3}
+  direction4: {fileID: 4464732861907290693, guid: 9dcad4e9c95933140a85020e0f547646, type: 3}
+  direction5: {fileID: 4375184714721516931, guid: 70c644be4d56e8743b128fcba8bdabfc, type: 3}
+  direction6: {fileID: 1784929678522360474, guid: 5a345aee32a2e5f448627219a5714603, type: 3}
+  direction7: {fileID: 8214075017993534539, guid: 4d16d8bcbba52784581fdb542bf0c2a4, type: 3}
+  direction8: {fileID: 4852456617611909328, guid: 946887971e62102499e3f6f0856e44fc, type: 3}
+  direction9: {fileID: 7484462838636964527, guid: 4cfc2513d62ca0e43b578aed8fc3137e, type: 3}
+  buttonA: {fileID: 5528305603780124184, guid: a3e6bcb4c5cadc446af53afeb6e7e687, type: 3}
+  buttonB: {fileID: 7088297710509768112, guid: f7af1a1afdde2804e9865ab9354d1451, type: 3}
 --- !u!114 &622659443
 MonoBehaviour:
   m_ObjectHideFlags: 0

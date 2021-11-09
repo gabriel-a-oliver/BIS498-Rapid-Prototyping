@@ -167,7 +167,7 @@ public class ActionManager : MonoBehaviour
                 debug += _actionQueue[i] + ", ";
             }
         }
-        Debug.Log("displaying action queue: " + debug);
+        //Debug.Log("displaying action queue: " + debug);
     }
 
     public int PerformNextAbility()

@@ -38,7 +38,7 @@ public class MasterPlayerController : MonoBehaviour
             BasicAction currentAction = _actionManager.GetActionFromInput(longestPossibleInput);
             if (currentAction != null)
             {
-                Debug.Log("adding to action queue");
+                //Debug.Log("adding to action queue");
                 _actionManager.AddToActionQueue(currentAction);
                 _actionManager.DisplayActionQueue();
             }
@@ -49,9 +49,9 @@ public class MasterPlayerController : MonoBehaviour
             _actionManager.ActionQueueLifeTimeDecrement();
             if (endLag == 0)
             {
-                Debug.Log("Perform next ability");
+                //Debug.Log("Perform next ability");
                 endLag = _actionManager.PerformNextAbility();
-                Debug.Log("new endlag: " + endLag);
+                //Debug.Log("new endlag: " + endLag);
             }
         }
         

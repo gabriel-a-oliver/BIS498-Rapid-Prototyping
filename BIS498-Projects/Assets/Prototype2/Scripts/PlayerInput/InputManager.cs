@@ -7,7 +7,30 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField] private InputPackage[] _inputPackages;
     [SerializeField] private String previousInput = "";
-    public GameObject inputStream;
+
+    [SerializeField] private GameObject[] inputStreamArray;
+    [SerializeField] private int currentInputStream = 0;
+    public GameObject inputStream0;
+    public GameObject inputStream1;
+    public GameObject inputStream2;
+    public GameObject inputStream3;
+    public GameObject inputStream4;
+    public GameObject inputStream5;
+    public GameObject inputStream6;
+    public GameObject inputStream7;
+
+    public GameObject direction1;
+    public GameObject direction2;
+    public GameObject direction3;
+    public GameObject direction4;
+    public GameObject direction5;
+    public GameObject direction6;
+    public GameObject direction7;
+    public GameObject direction8;
+    public GameObject direction9;
+    public GameObject buttonA;
+    public GameObject buttonB;
+
 
     public InputPackage[] InterpretCurrentInput(String currentInput)
     {
@@ -17,8 +40,7 @@ public class InputManager : MonoBehaviour
         {
             InputPackage newInputPackage = CreateInputPackage(currentInput);
             
-            
-            
+            DisplayOntoScreen(newInputPackage);
             
             result = CreateLongestPossibleInput(newInputPackage);
         }
@@ -29,6 +51,56 @@ public class InputManager : MonoBehaviour
         //DisplayInputArray();
         
         return result;
+    }
+
+    private void DisplayOntoScreen(InputPackage newInputPackage)
+    {
+        if (currentInputStream >= 8)
+        {
+            currentInputStream = 0;
+        }
+
+        GameObject currentDirection = null;
+        switch (newInputPackage.inputArray[0])
+        {
+            case "1":
+                currentDirection = direction1;
+                break;
+            case "2":
+                currentDirection = direction2;
+                break;
+            case "3":
+                currentDirection = direction3;
+                break;
+            case "4":
+                currentDirection = direction4;
+                break;
+            case "5":
+                currentDirection = direction5;
+                break;
+            case "6":
+                currentDirection = direction6;
+                break;
+            case "7":
+                currentDirection = direction7;
+                break;
+            case "8":
+                currentDirection = direction8;
+                break;
+            case "9":
+                currentDirection = direction9;
+                break;
+            default:
+                Debug.Log("Direction error");
+                break;
+        }
+        
+        for (int i = 0; i < inputStreamArray.Length - 1; i++)
+        {
+            //inputStreamArray[i].
+        }
+        
+        currentInputStream++;
     }
 
     private void DisplayInputArray()
@@ -104,7 +176,16 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        _inputPackages = new InputPackage[100]; // Equivalent to 100 frames or 1.4 seconds
+        _inputPackages = new InputPackage[100]; // Equivalent to storing the last 100 frames or 1.4 seconds
+        inputStreamArray = new GameObject[8];
+        inputStreamArray[0] = inputStream0;
+        inputStreamArray[1] = inputStream1;
+        inputStreamArray[2] = inputStream2;
+        inputStreamArray[3] = inputStream3;
+        inputStreamArray[4] = inputStream4;
+        inputStreamArray[5] = inputStream5;
+        inputStreamArray[6] = inputStream6;
+        inputStreamArray[7] = inputStream7;
     }
 
     // Start is called before the first frame update
