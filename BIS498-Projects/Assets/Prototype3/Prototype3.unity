@@ -385,9 +385,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 216383164}
   lines:
-  - plz like vid
-  - okay i will
-  textSpeed: 0.3
+  - Hello World!
+  - I am dialogue :)
+  textSpeed: 0.1
 --- !u!114 &1113897806
 MonoBehaviour:
   m_ObjectHideFlags: 0
