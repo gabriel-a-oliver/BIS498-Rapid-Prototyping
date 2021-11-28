@@ -152,6 +152,7 @@ Transform:
   m_Children:
   - {fileID: 164812770}
   - {fileID: 2000508443}
+  - {fileID: 1220558927}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -716,7 +717,7 @@ Transform:
   m_LocalPosition: {x: 558.7204, y: 303.80743, z: -24.233175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1766462980}
+  m_Father: {fileID: 104696714}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1220558928
@@ -962,7 +963,6 @@ Transform:
   m_Children:
   - {fileID: 539893925}
   - {fileID: 2041800142}
-  - {fileID: 1220558927}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1077,6 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fb6f3b2bc1dca47b291597edbe12b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmb: {fileID: 1220558928}
   fpsTarget: 60
   fpsText: {fileID: 1852047198}
   deltaTime: 0

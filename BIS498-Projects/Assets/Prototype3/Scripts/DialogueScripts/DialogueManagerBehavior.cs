@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 public class DialogueManagerBehavior : MonoBehaviour
 {
-    public GameObject partyOne;
-    public GameObject partyTwo;
-
+    [SerializeField] private GameObject partyOne;
     [SerializeField] private DialogueBlock[] partyOneDialogueBlocks;
+    [SerializeField] private GameObject partyTwo;
     [SerializeField] private DialogueBlock[] partyTwoDialogueBlocks;
+
     
     // Start is called before the first frame update
     void Start()
@@ -37,6 +37,14 @@ public class DialogueManagerBehavior : MonoBehaviour
     
     private void PartiesConverse()
     {
+        int partyOneDialogueBlocksLength = partyOneDialogueBlocks.Length;
+        int partyTwoDialogueBlocksLength = partyTwoDialogueBlocks.Length;
+
+        // while both arrays are not complete, swap between each parties' blocks
+        // trigger event for conversation start with party 1
+        // hold until event for block concluded triggers
+        // swap to party two and repeat
+        
         
     }
     

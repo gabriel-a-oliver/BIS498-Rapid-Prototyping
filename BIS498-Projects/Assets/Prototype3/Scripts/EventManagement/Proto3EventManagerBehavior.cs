@@ -4,8 +4,31 @@ using UnityEngine;
 
 public class Proto3EventManagerBehavior : MonoBehaviour
 {
+    public delegate void StartDialogueBlock();
+    public static event StartDialogueBlock startingDialogueBlock;
+
+    public static void StartingDIalogueBlockBehaviors()
+    {
+        if (startingDialogueBlock != null)
+        {
+            startingDialogueBlock();
+        }
+    }
     
-    /*// Downward Events
+    public delegate void EndDialogueBlock();
+    public static event EndDialogueBlock endingDialogueBlock;
+
+    public static void EndingDIalogueBlockBehaviors()
+    {
+        if (endingDialogueBlock != null)
+        {
+            endingDialogueBlock();
+        }
+    }
+    
+    
+    /*
+    // Downward Events
     public delegate void FlipToDownState();
     public static event FlipToDownState flippingDown;
     public delegate void FlippedToDownState();
