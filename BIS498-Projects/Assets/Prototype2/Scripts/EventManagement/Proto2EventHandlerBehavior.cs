@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class Proto2EventHandlerBehavior : MonoBehaviour
 {
-    
-    
     [SerializeField] private int fpsTarget = 60;
     [SerializeField] private TMP_Text fpsText;
     [SerializeField] private float deltaTime;
