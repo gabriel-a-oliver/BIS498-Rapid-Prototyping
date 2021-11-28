@@ -44,14 +44,14 @@ public class DialogueManagerBehavior : MonoBehaviour
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
                 onlyOnce = false;
-                LevelGameplay();
+                StartCoroutine(LevelGameplay());
             }
         }
     }
 
     public void EndingDialogueBlock()
     {
-        Debug.Log("ready for next lines");
+        //Debug.Log("ready for next lines");
         readyForNextLines = true;
     }
 
@@ -71,13 +71,8 @@ public class DialogueManagerBehavior : MonoBehaviour
         currentParty2DialogueBlockIndex = 0;
         party1Turn = true;
     }
-    
-    private void PartiesConverse()
-    {
-        
-    }
-    
-    private void LevelGameplay()
+
+    private IEnumerator LevelGameplay()
     {
         GetConversationDialogues(GameObject.Find("NPC1"), GameObject.Find("NPC2"));
         Debug.Log("After Getting Conversation Dialogues:");
@@ -86,9 +81,28 @@ public class DialogueManagerBehavior : MonoBehaviour
 
         currentConversationOver = false;
         StartCoroutine(HaveConversation());
-        new WaitUntil(() => currentConversationOver);
-        //PartiesConverse();
-
+        //new WaitUntil(() => currentConversationOver);
+        while (!readyForNextLines) yield return null;
+        //this.gameObject.GetComponent<FlagManager>().nPCsIntroConversation = true;
+        
+        GetConversationDialogues(GameObject.Find("Player"), GameObject.Find("NPC2"));
+        Debug.Log("After Getting Conversation Dialogues:");
+        Debug.Log("party 1:" + partyOne);
+        Debug.Log("party 2:" + partyTwo);
+        currentConversationOver = false;
+        StartCoroutine(HaveConversation());
+        while (!readyForNextLines) yield return null;
+        //this.gameObject.GetComponent<FlagManager>().playerIntroducesThemselves = true;
+        
+        GetConversationDialogues(GameObject.Find("NPC1"), GameObject.Find("Player"));
+        Debug.Log("After Getting Conversation Dialogues:");
+        Debug.Log("party 1:" + partyOne);
+        Debug.Log("party 2:" + partyTwo);
+        currentConversationOver = false;
+        StartCoroutine(HaveConversation());
+        while (!readyForNextLines) yield return null;
+        //this.gameObject.GetComponent<FlagManager>(). = true;
+        
         Debug.Log("end of gameplay");
     }
 
@@ -134,6 +148,7 @@ public class DialogueManagerBehavior : MonoBehaviour
     {
         myDialogueBox.GetComponent<DialogueBehavior>().SetDialogueBoxLines(currentDialogueBlock);
         myDialogueBox.GetComponent<DialogueBehavior>().StartDialogueBox();
-        yield return new WaitUntil(() => readyForNextLines);//new WaitForSeconds(currentDialogueBlock.maxWaitTime);
+        //yield return new WaitUntil(() => readyForNextLines);//new WaitForSeconds(currentDialogueBlock.maxWaitTime);
+        while (!readyForNextLines) yield return null;
     }
 }

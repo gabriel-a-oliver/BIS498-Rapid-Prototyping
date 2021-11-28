@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbc36107a89484b43bec82206f82202e, type: 3}
-  m_Name: GreetingsToBothNPCs
+  m_Name: ThatsGreatToHear
   m_EditorClassIdentifier: 
   blockOwner: Player
-  dialogueBlockTitle: GreetingsToBothNPCs
+  dialogueBlockTitle: ThatsGreatToHear
   dialogueBlockLines:
-  - Hey NPC1 and NPC2!
-  - How are you both?
+  - That's great to hear!
+  - Hope Turkey-Day was excellent too!
   currentDialogueIndex: 0
-  choicesArray:
-  - What were both talking about?
-  - How are you both?
+  choicesArray: []
   currentChoiceIndex: 0
   maxWaitTime: 6
