@@ -361,7 +361,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266816609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.8314025, y: 2.4107018, z: 0.4004102}
+  m_LocalPosition: {x: 5.8, y: 2.4107018, z: 0.4004102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 539893925}
@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 572233240}
   - component: {fileID: 572233239}
   - component: {fileID: 572233242}
+  - component: {fileID: 572233243}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -596,6 +597,20 @@ MonoBehaviour:
   relationship2Character: {fileID: 266816609}
   relationship2DialogueBlock:
   - {fileID: 11400000, guid: 517327744bed2ee4b80c90adfcc8e7db, type: 2}
+--- !u!114 &572233243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572233237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fe85471416a3d4da475a5f6fcb9012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementConstant: 0.2
+  me: {fileID: 572233237}
 --- !u!1 &825892828
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +1005,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745701493}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2014027, y: 2.4107018, z: 0.4004102}
+  m_LocalPosition: {x: 2.19, y: 2.4107018, z: 0.4004102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 539893925}

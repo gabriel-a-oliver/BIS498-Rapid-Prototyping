@@ -41,7 +41,7 @@ public class DialogueManagerBehavior : MonoBehaviour
     {
         if (onlyOnce)
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if (Mouse.current.rightButton.wasPressedThisFrame)
             {
                 onlyOnce = false;
                 LevelGameplay();
