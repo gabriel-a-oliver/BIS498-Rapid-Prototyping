@@ -34,17 +34,8 @@ public class Proto3EventHandlerBehavior : MonoBehaviour
     {
         showFPS();
 
-        if (conversationEngaged)
-        {
-            if (!dmb.dialogueBlockActivate)
-            {
-                
-            }
-            
-            
-        }
-        
     }
+    
 
     // help from: https://answers.unity.com/questions/1366716/how-to-liimit-fps.html
     private void checkFPS()

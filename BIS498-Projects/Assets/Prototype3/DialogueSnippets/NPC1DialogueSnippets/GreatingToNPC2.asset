@@ -16,5 +16,8 @@ MonoBehaviour:
   dialogueBlockTitle: GreatingToNPC2
   dialogueBlockLines:
   - Hi NPC2!
-  - Have you seen Player?
+  - Hope you are well!
+  currentDialogueIndex: 0
   choicesArray: []
+  currentChoiceIndex: 0
+  maxWaitTime: 6

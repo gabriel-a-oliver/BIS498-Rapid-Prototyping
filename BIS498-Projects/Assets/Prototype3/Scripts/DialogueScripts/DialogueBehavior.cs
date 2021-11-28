@@ -13,6 +13,8 @@ public class DialogueBehavior : MonoBehaviour
     [SerializeField] private DialogueManagerBehavior dmb;
     
     public TextMeshProUGUI textComponent;
+    public TextMeshProUGUI ownerComponent;
+
     public string[] lines;
     public float textSpeed;
 
@@ -24,9 +26,10 @@ public class DialogueBehavior : MonoBehaviour
         
     }
 
-    public void SetDialogueBoxLines(string[] newLines)
+    public void SetDialogueBoxLines(DialogueBlock newBlock)
     {
-        lines = newLines;
+        lines = newBlock.dialogueBlockLines;
+        ownerComponent.text = newBlock.blockOwner;
     }
     
     public void StartDialogueBox()

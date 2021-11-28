@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 public class DialogueManagerBehavior : MonoBehaviour
 {
     public GameObject myDialogueBox;
@@ -15,62 +17,42 @@ public class DialogueManagerBehavior : MonoBehaviour
     [SerializeField] private DialogueBlock[] partyTwoDialogueBlocks;
     [SerializeField] private int currentParty2DialogueBlockIndex;
 
+    private bool onlyOnce = true;
+    private bool readyForNextLines = false;
+    private bool currentConversationOver = true;
+
 
     private void OnEnable()
     {
-        Proto3EventManagerBehavior.startingDialogueBlock += StartingDialogueBlock;
+        //Proto3EventManagerBehavior.startingDialogueBlock += StartingDialogueBlock;
         Proto3EventManagerBehavior.endingDialogueBlock += EndingDialogueBlock;
         
     }
 
     private void OnDisable()
     {
-        Proto3EventManagerBehavior.startingDialogueBlock -= StartingDialogueBlock;
+        //Proto3EventManagerBehavior.startingDialogueBlock -= StartingDialogueBlock;
         Proto3EventManagerBehavior.endingDialogueBlock += EndingDialogueBlock;
 
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        LevelGameplay();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void StartingDialogueBlock()
-    {
-        dialogueBlockActivate = true;
-        if (party1Turn)
+        if (onlyOnce)
         {
-            myDialogueBox.GetComponent<DialogueBehavior>().SetDialogueBoxLines(partyOneDialogueBlocks[currentParty1DialogueBlockIndex].dialogueBlockLines);
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                onlyOnce = false;
+                LevelGameplay();
+            }
         }
-        else
-        {
-            myDialogueBox.GetComponent<DialogueBehavior>().SetDialogueBoxLines(partyTwoDialogueBlocks[currentParty2DialogueBlockIndex].dialogueBlockLines);
-        }
-        myDialogueBox.GetComponent<DialogueBehavior>().StartDialogueBox();
-
     }
 
     public void EndingDialogueBlock()
     {
-        if (party1Turn)
-        {
-            party1Turn = false;
-            currentParty1DialogueBlockIndex++;
-        }
-        else
-        {
-            party1Turn = true;
-            currentParty2DialogueBlockIndex++;
-        }
-
-        dialogueBlockActivate = false;
+        Debug.Log("ready for next lines");
+        readyForNextLines = true;
     }
 
     private void GetConversationDialogues(GameObject _partyOne, GameObject _partyTwo)
@@ -92,51 +74,7 @@ public class DialogueManagerBehavior : MonoBehaviour
     
     private void PartiesConverse()
     {
-        Debug.Log("conversation starting");
-        int partyOneDialogueBlocksLength = partyOneDialogueBlocks.Length;
-        int partyTwoDialogueBlocksLength = partyTwoDialogueBlocks.Length;
-        bool party1MoreBlocks = (partyOneDialogueBlocksLength > partyTwoDialogueBlocksLength);
-        bool conversationFinished = false;
-        Debug.Log("Party1 has more dialogue blocks:" + party1MoreBlocks);
-        // while both arrays are not complete, swap between each parties' blocks
-        // trigger event for conversation start with party 1
-        // hold until event for block concluded triggers
-        // swap to party two and repeat
-
         
-        for (int i = 0; !conversationFinished; i++)
-        {
-            Debug.Log("conversationLoop:" + i);
-            if (!dialogueBlockActivate)
-            {
-                Proto3EventManagerBehavior.StartingDialogueBlockBehaviors();
-            }
-
-            if (party1MoreBlocks)
-            {
-                if (currentParty1DialogueBlockIndex >= partyOneDialogueBlocksLength)
-                { 
-                    conversationFinished = true;
-                    Debug.Log("conversation finished from party1 blocks end");
-                }
-            }
-            else
-            {
-                if (currentParty2DialogueBlockIndex >= partyTwoDialogueBlocksLength)
-                {
-                    conversationFinished = true;
-                    Debug.Log("conversation finished from party2 blocks end");
-
-                }
-            }
-
-            if (i >= 1)
-            {
-                conversationFinished = true;
-                Debug.Log("conversation finished from safety i value:" + i);
-
-            }
-        }
     }
     
     private void LevelGameplay()
@@ -144,11 +82,58 @@ public class DialogueManagerBehavior : MonoBehaviour
         GetConversationDialogues(GameObject.Find("NPC1"), GameObject.Find("NPC2"));
         Debug.Log("After Getting Conversation Dialogues:");
         Debug.Log("party 1:" + partyOne);
-        Debug.Log("part 2:" + partyTwo);
-        PartiesConverse();
-        Debug.Log("gameplay finished");
-        
+        Debug.Log("party 2:" + partyTwo);
+
+        currentConversationOver = false;
+        StartCoroutine(HaveConversation());
+        new WaitUntil(() => currentConversationOver);
+        //PartiesConverse();
+
+        Debug.Log("end of gameplay");
     }
 
-    
+    private IEnumerator HaveConversation()
+    {
+        Debug.Log("conversation starting");
+        myDialogueBox.SetActive(true);
+        int partyOneDialogueBlocksLength = partyOneDialogueBlocks.Length;
+        int partyTwoDialogueBlocksLength = partyTwoDialogueBlocks.Length;
+        bool party1HasMoreBlocks = (partyOneDialogueBlocksLength > partyTwoDialogueBlocksLength);
+        
+        currentConversationOver = false;
+        Debug.Log("Party1 has more dialogue blocks:" + party1HasMoreBlocks);
+
+        DialogueBlock[] combinedListOfDialogueBlocks = new DialogueBlock[partyOneDialogueBlocksLength + partyTwoDialogueBlocksLength];
+
+        // Combine all blocks into the order of conversation
+        int iteration = 0;
+        for (int i = 0; i < partyOneDialogueBlocksLength; i++)
+        {
+            combinedListOfDialogueBlocks[i + iteration] = partyOneDialogueBlocks[i];
+            iteration++;
+        }
+        iteration = 0;
+        for (int i = 0; i < partyTwoDialogueBlocksLength; i++)
+        {
+            combinedListOfDialogueBlocks[1 + i + iteration] = partyTwoDialogueBlocks[i];
+            iteration++;
+        }
+
+        foreach (var currentDialogueBlock in combinedListOfDialogueBlocks)
+        {
+            readyForNextLines = false;
+            yield return StartCoroutine(PerformDialogueBox(currentDialogueBlock));
+        }
+        
+        Debug.Log("conversation over");
+        currentConversationOver = true;
+        myDialogueBox.gameObject.SetActive(false);
+    }
+
+    private IEnumerator PerformDialogueBox(DialogueBlock currentDialogueBlock)
+    {
+        myDialogueBox.GetComponent<DialogueBehavior>().SetDialogueBoxLines(currentDialogueBlock);
+        myDialogueBox.GetComponent<DialogueBehavior>().StartDialogueBox();
+        yield return new WaitUntil(() => readyForNextLines);//new WaitForSeconds(currentDialogueBlock.maxWaitTime);
+    }
 }
