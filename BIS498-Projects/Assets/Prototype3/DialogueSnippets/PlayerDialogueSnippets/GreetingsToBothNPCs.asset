@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc36107a89484b43bec82206f82202e, type: 3}
   m_Name: GreetingsToBothNPCs
   m_EditorClassIdentifier: 
+  blockOwner: Player
   dialogueBlockTitle: GreetingsToBothNPCs
   dialogueBlockLines:
   - Hey NPC1 and NPC2!

@@ -7,8 +7,9 @@ public class Proto3EventManagerBehavior : MonoBehaviour
     public delegate void StartDialogueBlock();
     public static event StartDialogueBlock startingDialogueBlock;
 
-    public static void StartingDIalogueBlockBehaviors()
+    public static void StartingDialogueBlockBehaviors()
     {
+        Debug.Log("StartingDialogueBlockBehavior event triggered");
         if (startingDialogueBlock != null)
         {
             startingDialogueBlock();
@@ -18,7 +19,7 @@ public class Proto3EventManagerBehavior : MonoBehaviour
     public delegate void EndDialogueBlock();
     public static event EndDialogueBlock endingDialogueBlock;
 
-    public static void EndingDIalogueBlockBehaviors()
+    public static void EndingDialogueBlockBehaviors()
     {
         if (endingDialogueBlock != null)
         {

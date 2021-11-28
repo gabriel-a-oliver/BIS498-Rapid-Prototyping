@@ -10,6 +10,8 @@ using UnityEngine.InputSystem;
 // Help from: https://www.youtube.com/watch?v=8oTYabhj248
 public class DialogueBehavior : MonoBehaviour
 {
+    [SerializeField] private DialogueManagerBehavior dmb;
+    
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed;
@@ -22,10 +24,15 @@ public class DialogueBehavior : MonoBehaviour
         
     }
 
+    public void SetDialogueBoxLines(string[] newLines)
+    {
+        lines = newLines;
+    }
+    
     public void StartDialogueBox()
     {
         textComponent.text = string.Empty;
-                StartDialogue();
+        StartDialogue();
     }
 
     private void Update()
@@ -75,7 +82,8 @@ public class DialogueBehavior : MonoBehaviour
 
     private void EndDialogueBox()
     {
+        dmb.EndingDialogueBlock();
         
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

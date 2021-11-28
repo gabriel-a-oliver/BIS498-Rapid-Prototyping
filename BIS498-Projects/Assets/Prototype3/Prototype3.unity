@@ -646,6 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca536fe8992812943acbcf6a0f2ad3bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmb: {fileID: 1220558928}
   textComponent: {fileID: 216383164}
   lines:
   - Hello World!
@@ -732,10 +733,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c85f01d2517af64a8b575dc238ce322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myDialogueBox: {fileID: 1113897803}
+  dialogueBlockActivate: 0
+  party1Turn: 0
   partyOne: {fileID: 0}
-  partyTwo: {fileID: 0}
   partyOneDialogueBlocks: []
+  currentParty1DialogueBlockIndex: 0
+  partyTwo: {fileID: 0}
   partyTwoDialogueBlocks: []
+  currentParty2DialogueBlockIndex: 0
 --- !u!1 &1734436124
 GameObject:
   m_ObjectHideFlags: 0

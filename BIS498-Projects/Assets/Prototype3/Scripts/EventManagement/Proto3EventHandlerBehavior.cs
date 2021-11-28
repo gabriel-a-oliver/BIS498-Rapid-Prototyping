@@ -14,6 +14,8 @@ public class Proto3EventHandlerBehavior : MonoBehaviour
     [SerializeField] private TMP_Text fpsText;
     [SerializeField] private float deltaTime;
 
+    public bool conversationEngaged;
+
     private void Awake()
     {
         QualitySettings.vSyncCount = 0;
@@ -23,14 +25,24 @@ public class Proto3EventHandlerBehavior : MonoBehaviour
 
     void Start()
     {
-        
+        conversationEngaged = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         showFPS();
-        
+
+        if (conversationEngaged)
+        {
+            if (!dmb.dialogueBlockActivate)
+            {
+                
+            }
+            
+            
+        }
         
     }
 

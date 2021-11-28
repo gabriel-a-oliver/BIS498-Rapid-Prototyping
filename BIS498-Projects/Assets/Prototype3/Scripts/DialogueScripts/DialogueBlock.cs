@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New DialogueBlock", menuName = "Dialogue Block")]
 public class DialogueBlock : ScriptableObject
 {
+    public string blockOwner;
     public string dialogueBlockTitle;
     public string[] dialogueBlockLines;
 
