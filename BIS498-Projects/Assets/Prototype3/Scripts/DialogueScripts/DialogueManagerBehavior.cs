@@ -151,4 +151,22 @@ public class DialogueManagerBehavior : MonoBehaviour
         //yield return new WaitUntil(() => readyForNextLines);//new WaitForSeconds(currentDialogueBlock.maxWaitTime);
         while (!readyForNextLines) yield return null;
     }
+
+    private int PromptDecision(DialogueBlock myChoices)
+    {
+        Debug.Log("Press Q to: " + myChoices.choicesArray[0] + ". or Press E to: " + myChoices.choicesArray[1] + ".");
+        if (Keyboard.current.qKey.wasPressedThisFrame)
+        {
+            return 0;
+        }
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            return 1;
+        }
+
+        new WaitForSeconds(10);
+        return -1;
+    }
+    
 }
