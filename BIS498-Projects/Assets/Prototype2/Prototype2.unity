@@ -529,12 +529,6 @@ MonoBehaviour:
   _inputReader: {fileID: 622659440}
   _inputManager: {fileID: 622659442}
   _actionManager: {fileID: 622659443}
-  box1: {fileID: 1692618773}
-  box2: {fileID: 1641133515}
-  box3: {fileID: 1781794262}
-  box4: {fileID: 1652593645}
-  box5: {fileID: 1593304917}
-  box6: {fileID: 552913019}
   endLag: 0
 --- !u!114 &622659442
 MonoBehaviour:
